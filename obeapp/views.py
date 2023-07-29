@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 # admin.site.register(ModelSchema)
 # admin.site.register(FieldSchema)
 import pandas as pd
@@ -25,10 +26,14 @@ def user_login(request):
     if request.method == "POST":
         uname = request.POST['unamef']
         pswd = request.POST['pswdf']
+        user = authenticate(request,username=uname, password=pswd,backend='obeapp.backends.EmailBackend')
+        
+        
         if CustomUser.objects.filter(username=uname).exists():
                    obj=CustomUser.objects.get(username=uname)
                    if(obj.password==pswd):
                         login(request, obj)
+                        print("******************")
                         return redirect('faculty_dashboard')
                    else:
                         print("error")
@@ -50,6 +55,7 @@ def user_registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            print("user form saveddddddddddddddddddddddd")
             return redirect(user_login)  # Redirect to login page after successful registration
 
     else:
@@ -106,7 +112,9 @@ def department_admin_login(request):
 @login_required(login_url='/admin_login')
 def admin_dashboard(request):
     return render(request, 'obeapp/admin/admin_dashboard.html')
+@login_required(login_url='/user_login')
 def faculty_dashboard(request):
+    print(" in faculty login*************************************")
     return render(request, 'obeapp/faculty/faculty_dashboard.html')
 def department_dashboard(request):
     return render(request, 'obeapp/department/department_admin.html')

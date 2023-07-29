@@ -36,11 +36,12 @@ class CustomUser(AbstractUser, PermissionsMixin):
     Permissions = models.CharField(max_length=1000)
     Biometricid = models.CharField(max_length=100)
     branch = models.CharField(max_length=100, default="None")
+    #email = models.EmailField(unique=True)
 
     # Remove 'username' and 'email' fields, as they are already provided by AbstractUser
 
     # Add this field to use 'email' as the unique identifier for the user
-    USERNAME_FIELD = 'email'
+    #USERNAME_FIELD = 'email'
 
     # Add a unique related_name for the groups field
     groups = models.ManyToManyField(
