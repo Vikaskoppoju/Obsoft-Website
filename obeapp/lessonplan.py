@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import lessonplanBatch,courseoutcomes,textbooks,referencebooks,targetproficiency,lectureplan,co_pso_Matrix,course_end_survey,details_of_instructors,teachers
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser
+
 # Create your views here.
 def login(request):
      if request.method == "POST":
@@ -22,12 +23,19 @@ def login(request):
 def mainpage(request):
      #usname=teachers.objects.get(name=name)
      #return render(request,'obeapp/obapp/mainpage.html',{'usname':usname})
-     return render(request,'obeapp/obapp/mainpage.html')
+     if request.session.get('user_id', None):
+          return render(request,'obeapp/obapp/mainpage.html')
+     else:
+         return redirect('course_view')
 # def mainpageview(request):
 #     return render(request,'obeapp/obapp/mainpageview.html')
 @login_required(login_url='/user_login')
 def inputform(request):
-    return render(request,'obeapp/obapp/inputform.html')
+    if request.session.get('user_id', None):
+        return render(request,'obeapp/obapp/inputform.html')
+    else:
+        return redirect('course_view')
+        
 def storeinput(request):
     if request.method == "POST":
         coursecode=request.POST['coursecode']
@@ -266,7 +274,10 @@ def inputcoursecode(request):
      return render(request,'obeapp/obapp/inputcoursecode.html',{'codes':codes})
 @login_required(login_url='/user_login')
 def updatecoursecode(request):
-     return render(request,'obeapp/obapp/updatecoursecode.html')
+     if request.session.get('user_id', None):
+          return render(request,'obeapp/obapp/updatecoursecode.html')
+     else:
+         return redirect('course_view')
 @login_required(login_url='/user_login')
 def updateplan(request):
         coursecode=request.POST['coursecode']
