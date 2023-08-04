@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from .models import lessonplanBatch,courseoutcomes,textbooks,referencebooks,targetproficiency,lectureplan,co_pso_Matrix,course_end_survey,details_of_instructors,teachers
+from django.contrib.auth.decorators import login_required
+from .models import CustomUser
 # Create your views here.
 def login(request):
      if request.method == "POST":
@@ -16,12 +18,14 @@ def login(request):
           else:
                messages.error(request,'invalid username please try again')
      return render(request,'obeapp/obapp/login.html')
+@login_required(login_url='/user_login')
 def mainpage(request):
      #usname=teachers.objects.get(name=name)
      #return render(request,'obeapp/obapp/mainpage.html',{'usname':usname})
      return render(request,'obeapp/obapp/mainpage.html')
 # def mainpageview(request):
 #     return render(request,'obeapp/obapp/mainpageview.html')
+@login_required(login_url='/user_login')
 def inputform(request):
     return render(request,'obeapp/obapp/inputform.html')
 def storeinput(request):
@@ -213,7 +217,11 @@ def viewplan(request):
         t=lessonplanBatch.objects.filter(course_code=coursecode).first()
         if(t==None):
            messages.info(request,'course code does not exist')
-           return redirect('inputcoursecode')
+           try:
+               if CustomUser.objects.get(Biometricid=str(request.session.get('user_id', None))):
+                    return redirect('inputcoursecode')
+           except:
+               return redirect('course_view')
         if(t.section=='CSE(AI)'):
              branch='Computer Science & Engineering(Artificial Intelligence)'
         elif(t.section=='CSE'):
@@ -250,9 +258,14 @@ def viewplan(request):
         d={'branch':branch,'bat':bat,'result_co':result_co,'textbook':textbook,'rfbook':rfbook,'tp':tp,'lst':lst,'copsomat':copsomat,'question':question,'instructor':instructor,'l':l}
         return render(request,'obeapp/obapp/viewplan.html',d)
 def inputcoursecode(request):
-     return render(request,'obeapp/obapp/inputcoursecode.html')
+     # print(request.session.get('user_id', None))
+     obj = CustomUser.objects.get(Biometricid=str(request.session.get('user_id', None)))
+     codes = obj.Permissions.split(",")
+     return render(request,'obeapp/obapp/inputcoursecode.html',{'codes':codes})
+@login_required(login_url='/user_login')
 def updatecoursecode(request):
      return render(request,'obeapp/obapp/updatecoursecode.html')
+@login_required(login_url='/user_login')
 def updateplan(request):
         coursecode=request.POST['coursecode']
         t=lessonplanBatch.objects.filter(course_code=coursecode).first()

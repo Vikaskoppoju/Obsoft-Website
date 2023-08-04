@@ -50,6 +50,7 @@ urlpatterns = [
     path('lessonplan/inputform',lessonplan.inputform,name='inputform'),
     path('lessonplan/storeinput',lessonplan.storeinput,name='storeinput'),
     path('lessonplan/inputcoursecode',lessonplan.inputcoursecode,name='inputcoursecode'),
+    # path('lessonplan/viewcourses',lessonplan.viewcourses,name='viewcourses'),
     path('lessonplan/updatecoursecode',lessonplan.updatecoursecode,name='updatecoursecode'),
     path('lessonplan/updateplan',lessonplan.updateplan,name='updateplan'),
     path('lessonplan/updateinput',lessonplan.updateinput,name='storeinput'),
@@ -57,5 +58,6 @@ urlpatterns = [
     path('lessonplan/mainpage',lessonplan.mainpage,name='mainpage'),
     #path('lessonplan/mainpageview',lessonplan.mainpageview,name='mainpageview'),
     path('course_view',views.course_view,name='course_view'),
-    path('dept_course_view',views.dept_course_view,name='dept_course_view')
+    path('dept_course_view',views.dept_course_view,name='dept_course_view'),
+    path('NotFound',views.NotFound,name='NotFound')
 ]

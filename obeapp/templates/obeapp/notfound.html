@@ -1,5 +1,5 @@
-{% extends "obeapp/faculty/index.html" %} 
-{% block inputcoursecode %} 
+{% extends "./index.html" %} 
+{% block notfound %} 
 {% load static %}
 
 <style>
@@ -103,7 +103,7 @@
 
 <body>
   <div class="box">
-    <form action="viewplan" method="POST" class="login-email" target="_blank">
+    <!-- <form action="lessonplan/viewplan" method="POST" class="login-email" target="_blank">
       {% csrf_token %}
       <div>
         {% for message in messages %}
@@ -111,17 +111,15 @@
         {% endfor %}
       </div>
       <div class="inputBox">
-        <select type="text" name="coursecode" class="inp" required >
-          {% for i in codes %}
-        <option value="{{i}}">{{i}}</option>
-        {% endfor %}
-        </select>
+        <input type="text" name="coursecode" class="inp" required />
+        <label>Enter Course Code:</label>
       </div>
 
       <div class="input-group">
         <button name="submit" class="btn btn-primary">View</button>
       </div>
-    </form>
+    </form> -->
+    <h1>404 Page Not Found</h1>
   </div>
   {% endblock %}
 </body>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from dynamic_models.models import ModelSchema, FieldSchema
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -19,22 +19,26 @@ from .models import *
 from .forms import *
 
 #<=======================================Admin(HOD's) and Faculty Logins =================================>
-
+def NotFound(request):
+    return render("obapp/notfound.html")
 def user_login(request):
     if request.user.is_authenticated:
+        # print("$$$$$$$$$$$$$$")
+        # userid = request.POST['unamef']
         return redirect(faculty_dashboard)
     if request.method == "POST":
-        uname = request.POST['unamef']
+        userid = request.POST['unamef']
         pswd = request.POST['pswdf']
-        user = authenticate(request,username=uname, password=pswd,backend='obeapp.backends.EmailBackend')
+        user = authenticate(request,Biometricid=userid, password=pswd,backend='obeapp.backends.EmailBackend')
         
         
-        if CustomUser.objects.filter(username=uname).exists():
-                   obj=CustomUser.objects.get(username=uname)
+        if CustomUser.objects.filter(Biometricid=userid).exists():
+                   obj=CustomUser.objects.get(Biometricid=userid)
                    if(obj.password==pswd):
                         login(request, obj)
                         print("******************")
-                        return redirect('faculty_dashboard')
+                        request.session['user_id'] = userid
+                        return redirect(faculty_dashboard)
                    else:
                         print("error")
                         messages.error(request,'invalid passwod please try again')
@@ -121,6 +125,10 @@ def department_dashboard(request):
 def course_view(request):
      return render(request,'obeapp/admin/course_view.html')
 def dept_course_view(request):
+    #  obj = CustomUser.objects.get(branch="cse")
+    #  codes = []
+    #  for i in obj.Permissions:
+    #     codes.append(i.split(","))
      return render(request,'obeapp/department/course_view.html')
 def upload_course_atte(request):
      return render(request,'obeapp/faculty/upload_course_atte.html')

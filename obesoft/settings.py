@@ -75,26 +75,26 @@ WSGI_APPLICATION = 'obesoft.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#      'default': {
+DATABASES = {
+     'default': {
         
-#          # 'ENGINE': 'django.db.backends.sqlite3',
-#          # 'NAME': BASE_DIR / 'db.sqlite3',
-#          'ENGINE': 'django.db.backends.mysql',
-#          'NAME': 'obefinal1',
-#          'USER':'root',
-#            'PASSWORD':'sushma562341kurella',
-#         # 'PASSWORD':'jaga@6493',
-#          'HOST':'127.0.0.1',
-#          'port':'3306'
+         # 'ENGINE': 'django.db.backends.sqlite3',
+         # 'NAME': BASE_DIR / 'db.sqlite3',
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'obsoft2',
+         'USER':'root',
+        # 'PASSWORD':'sushma562341kurella',
+        'PASSWORD':'jaga@6493',
+         'HOST':'127.0.0.1',
+         'port':'3306'
 
         
-#      }
-#  }
-import dj_database_url
-DATABASES = {
-     'default': dj_database_url.parse("postgres://obesoft_1kui_user:KB6aocxzlx1clZEchOALNbXPD8oQlRIK@dpg-cj146bq7l0ft7nk3gji0-a.oregon-postgres.render.com/obesoft_1kui")
-}
+     }
+ }
+# import dj_database_url
+# DATABASES = {
+#      'default': dj_database_url.parse("postgres://obesoft_1kui_user:KB6aocxzlx1clZEchOALNbXPD8oQlRIK@dpg-cj146bq7l0ft7nk3gji0-a.oregon-postgres.render.com/obesoft_1kui")
+# }
 
 
 # Password validation
