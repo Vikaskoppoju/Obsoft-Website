@@ -54,6 +54,7 @@ def user_logout(request):
     logout(request)
     return redirect(user_login)  # Replace 'login' with the name of your login page URL pattern
 
+@login_required(login_url='/admin_login')
 def user_registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
