@@ -70,11 +70,47 @@
                     I have checked <a href="javascript:;" class="text-dark font-weight-bolder">Regulation and Batch</a>
                   </label>
                 </div>
-                <button onclick="show()" id="confirm" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0"> addregulation</button>
-                <div class=" card-body text-center" id="subbut" style="display:none;box-shadow: 0px 0px 10px 0px solid gray; " >
-                  <h3> are you sure?</h3>
-                  <input type="submit"  class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" value="Add Regulation">
-                </div>
+                <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Launch demo modal
+    </button>
+                
+    <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><center>Add Regulation</center></h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body"><h3>Are You Sure !!!!!</h3></div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button onclick="show()" id="confirm" class="btn btn-primary " data-bs-dismiss="modal">Add Regulation</button>
+        </div>
+      </div>
+    </div>
+  </div>
               </form>
               </div>
               <style>

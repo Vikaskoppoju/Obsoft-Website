@@ -1,9 +1,8 @@
+{% extends "obeapp/faculty/index.html" %}
+{% block updateform %} 
 {% load static %}
-<html>
-    <head>
-        <title>
-            lectureplan
-        </title>
+
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -236,13 +235,30 @@
 
             
         </style>-->
-    </head>
+        <style>
+            .maindiv{
+                margin: 10px;
+            }
+        .xyz{
+    display: flex;
+    margin: 10px;
+}
+.non{
+    display: none;
+}
+input{
+    width: 100%;
+}
+
+        </style>
+    
+   
     <body>
 
 
         <form action="updateinput" method="POST">
             {% csrf_token %}
-            <input type="text" id="numco" name="numco" value="{{numco}}" placeholder="{{numco}}">
+            <input class="non" type="text" id="numco" name="numco" value="{{numco}}" placeholder="{{numco}}">
         <table class="outertable" id="outertable">
             <thead>
                 <tr>
@@ -253,13 +269,13 @@
             <table >
             <tr>
                 <td id="image">
-            <img src="{% static "symbol.jpg" %}"  alt="home" width="100px" height="100px"/>
+            <!-- <img src="{% static "symbol.jpg" %}"  alt="home" width="100px" height="100px"/> -->
             </td>
             <td >
                 <center>
-            <h1 class="heading1"id="head1">SRI VASAVI ENGINEERING COLLEGE(AUTONAMOUS)</h1>
-            <h3 class="heading2" id="head2">PEDATADEPALLI TADEPALLIGUDEM-534101</h3>
-            <h2 class="heading3" id="head3">Department of {{branch}}</h2>
+            <h3 class="heading1"id="head1">SRI VASAVI ENGINEERING COLLEGE(AUTONAMOUS)</h3>
+            <h5 class="heading2" id="head2">PEDATADEPALLI TADEPALLIGUDEM-534101</h5>
+            <h4 class="heading3" id="head3">Department of {{branch}}</h4>
             </center>
             </tr>
             </tr>
@@ -269,7 +285,7 @@
         
     </center>
     </div>
-    <div style="height:8px" id="hrdownline1"></div>
+    <div style="height:8px ;width: 100%;" id="hrdownline1"></div>
     <hr class="secondhr">
         </div>
     </header>
@@ -281,34 +297,44 @@
         <td>
 <div class="maindiv">
     <center>
-        <h2 id="lessonplan">Lesson Plan</h2>
+        <h4 id="lessonplan">Lesson Plan</h4>
     </center>
+    <br>
             <div id="lesson_plan_details">
-             
-                <table width="80%" class="lesson_plan_details_table" >
+          <center>  
+                <table  class="lesson_plan_details_table" >
                     <tr>
-                        <td width="60%" ><div class="lesson_plan_details_row"><h3 class="batch_h3">Batch:</h3></h3><h3 class="batch_h3_details"><input name="batch" value="{{bat.batch}}" placeholder="{{bat.batch}}"></h3></div></td>
-                        <td width="30%" ></td>
+                        <td style="width: 25%;" ><div class="lesson_plan_details_row"><h5 class="batch_h3">Batch:</h5><h5 class="batch_h3_details"></h5></div></td>
+                        <td style="width: 25%;"><input name="batch" value="{{bat.batch}}" placeholder="{{bat.batch}}"></td>
+                        <td style="width: 25%;"></td>
+                        <td style="width: 25%;"></td>
                     </tr>
                     <tr >
-                        <td><div class="lesson_plan_details_row"><h3 class="batch_h3">AcademicYear:</h3><h3 class="batch_h3_details"><input name="academicyear" value="{{bat.academicyear}}" placeholder="{{bat.academicyear}}"></div></td>
-                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Programme:</h3><h3 class="batch_h3_details"><input name="programme" value="{{bat.programme}}" placeholder="{{bat.programme}}"></div></td>
+                        <td style="width: 25%;" ><div class="lesson_plan_details_row"><h5 class="batch_h3">AcademicYear:</h5><h5 class="batch_h3_details"></div></td>
+                        <td style="width: 25%;"><input name="academicyear" value="{{bat.academicyear}}" placeholder="{{bat.academicyear}}"></td>
+                        <td style="width: 25%; text-align: right;"><div class="lesson_plan_details_row"><h5 class="batch_h3">Programme:</h5><h5 class="batch_h3_details"></div></td>
+                        <td style="width: 25%;"><input name="programme" value="{{bat.programme}}" placeholder="{{bat.programme}}"></td>
                     </tr>
                     <tr >
-                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Semester:</h3><h3 class="batch_h3_details"><input name="semester" value="{{bat.semester}}" placeholder="{{bat.semester}}"></h3></div></td>
-                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Section:</h3><h3 class="batch_h3_details"><input name="section" value="{{bat.section}}" placeholder=""></h3></div></td>
+                        <td style="width: 25%;"><div class="lesson_plan_details_row"><h5 class="batch_h3">Semester:</h5><h5 class="batch_h3_details"></h5></div></td>
+                        <td style="width: 25%;"><input name="semester" value="{{bat.semester}}" placeholder="{{bat.semester}}"></td>
+                        <td style="width: 25%;text-align: right;"><div class="lesson_plan_details_row"><h5 class="batch_h3">Section:</h5><h5 class="batch_h3_details"></h5></div></td>
+                        <td style="width: 25%;"><input name="section" value="{{bat.section}}" placeholder=""></td>
                     </tr>
                     <tr >
-                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Name of the course:</h3><h3 class="batch_h3_details"><input name="nameofthecourse" value="{{bat.name_of_the_course}}" placeholder="{{bat.name_of_the_course}}"></h3></div></td>
-                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Course Code:</h3><h3 class="batch_h3_details"><input name="coursecode" value="{{bat.course_code}}" placeholder="{{bat.course_code}}"></h3></div></td>
+                        <td style="width: 25%;"><div class="lesson_plan_details_row"><h5 class="batch_h3">Name of the course:</h5><h5 class="batch_h3_details"></h5></div></td>
+                        <td style="width: 25%;"><input name="nameofthecourse" value="{{bat.name_of_the_course}}" placeholder="{{bat.name_of_the_course}}"></td>
+                        <td style="width: 25%;text-align: right;"><div class="lesson_plan_details_row"><h5 class="batch_h3">Course Code:</h5><h5 class="batch_h3_details"></h5></div></td>
+                        <td style="width: 25%;"><input name="coursecode" value="{{bat.course_code}}" placeholder="{{bat.course_code}}"></td>
                     </tr>
                 </table>
+          </center>
             </div>
         <hr class="hr123">
             <div id="courseoutcomes">
-                <h2 class="lessonplan">Course Outcomes (Along With Knowleddge Level):</h2>
-                <h2 class="below_heading">After Completion of this course, the student will be able to:</h2>
-                <table border="1" cellpadding="20px" width="90%">
+                <center><h4 class="lessonplan">Course Outcomes (Along With Knowleddge Level):</h4>
+                <h4 class="below_heading">After Completion of this course, the student will be able to:</h4></center>
+                <table border="1" style="table-layout: fixed;width: 100%;">
                     <thead>
                         <td>CO</td>
                         <td>Course Outcomes</td>
@@ -316,46 +342,52 @@
                     </thead>
                     {% for i,j in result_coF %}
                     <tr>
-                        <td><input name="{{j.0}}" value="{{i.co}}" placeholder="{{i.co}}"></td>
-                        <td class="align_left"><input name="{{j.1}}" value="{{i.courseoutcome}}" placeholder="{{i.courseoutcome}}"></td>
-                        <td><input name="{{j.2}}" value="{{i.knowledge_level}}" placeholder="{{i.knowledge_level}}"></td>
+                        <td><input   name="{{j.0}}" value="{{i.co}}" placeholder="{{i.co}}"></td>
+                        <td class="align_left"><input   name="{{j.1}}" value="{{i.courseoutcome}}" placeholder="{{i.courseoutcome}}"></td>
+                        <td><input   name="{{j.2}}" value="{{i.knowledge_level}}" placeholder="{{i.knowledge_level}}"></td>
                     </tr>
                     {% endfor %}
                     
                 </table>
             </div>
-        
+        <br>
             <div id="textbooks">
-                <input type="text" name="copytexbook" value="{{textbook_len}}" class="copy" placeholder="{{textbook_len}}" id="copytb">
-                <h2 class="lessonplan heads">TextBooks</h2>
-                <table border="0" cellpadding="10px" width="90%" class="tb_rb" id="textbook_table">
+                <input type="text" class="non" name="copytexbook" value="{{textbook_len}}" class="copy" placeholder="{{textbook_len}}" id="copytb">
+                <center><h4 class="lessonplan heads">TextBooks</h4></center>
+                <table border="0" style="table-layout: fixed;width: 100%;border: 1px solid black;" class="tb_rb" id="textbook_table">
                     {% for i,j in textbookF%}
                     <tr  id="rmtb{{i.sno}}">
-                        <td><input name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
-                        <td class="align_left"><input name="{{j}}" value="{{i.textbook_details}}" placeholder="{{i.textbook_details}}"></td>
+                        <td class="align_left"style="width:50% ;"><input  name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
+                        <td class="align_left"style="width:50% ;"><input  name="{{j}}" value="{{i.textbook_details}}" placeholder="{{i.textbook_details}}"></td>
                     </tr>
                     {% endfor %}
                 </table>
             </div>
-            <div onclick="rmtb()" class="remove_button"><center> REMOVE</center></div>
-            <div class="adding_button" onclick="textbook()"><center>+ADD</center></div>
+            <div class="xyz">
+               
+            <div class="adding_button btn btn-primary" onclick="textbook()"><center>+ ADD</center></div>&nbsp;&nbsp;&nbsp;
+            <div onclick="rmtb()" class="remove_button btn btn-primary"><center>- REMOVE</center></div>
+            </div>
+            <br>
             <div id="referencebooks">
-                <h2 class="lessonplan heads">Reference Books</h2>
-                <input type="text" name="copyreferencebook" value="{{rfbook_len}}" class="copy" placeholder="{{rfbook_len}}" id="copyrb">
-                <table border="0" cellpadding="10px" width="90%" class="tb_rb" id="referencebook_table">
+                <center><h4 class="lessonplan heads">Reference Books</h4></center>
+                <input type="text" class="non" name="copyreferencebook" value="{{rfbook_len}}" class="copy" placeholder="{{rfbook_len}}" id="copyrb">
+                <table border="0" style="table-layout: fixed;width: 100%;border: 1px solid black;" class="tb_rb" id="referencebook_table">
                     {% for i,j in rfbookF %}
                     <tr id="rmrb{{i.sno}}">
-                        <td><input name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
-                        <td class="align_left"><input name="{{j}}" value="{{i.rfbook_details}}" placeholder="{{i.rfbook_details}}"></td>
+                        <td style="width: 50%;" ><input  name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
+                        <td class="align_left" style="width: 50%;" ><input   name="{{j}}" value="{{i.rfbook_details}}" placeholder="{{i.rfbook_details}}"></td>
                     </tr>
                     {% endfor %}
                 </table>
-                <div class="adding_button" onclick="referencebook()"><center>+ADD</center></div>
-                <div onclick="rmrb()" class="remove_button"><center> REMOVE</center></div>
+                <div class="xyz">
+                    <div class="adding_button btn btn-primary" onclick="referencebook()"><center>+ ADD</center></div>&nbsp;&nbsp;&nbsp;
+                <div onclick="rmrb()" class="remove_button btn btn-primary"><center>- REMOVE</center></div>
+                </div>
             </div>
             <div id="targetproficiency">
-                <h2 class="lessonplan heads">targetproficiency and attainment Levels(for each course outcome)</h2>
-                <table border="1" cellpadding="10px" width="90%">
+               <center> <h4 class="lessonplan heads">targetproficiency and attainment Levels(for each course outcome)</h4></center>
+                <table border="1" style="table-layout: fixed;width: 100%;border: 1px solid black;">
                     <thead>
                         <td>Cos</td>
                         <td>targetproficiencylevel</td>
@@ -365,11 +397,11 @@
                     </thead>
                     {% for i,j in tpF %}
                     <tr>
-                        <td><input name="{{j.0}}" value="{{i.co}}" placeholder="{{i.co}}"></td>
-                        <td><input name="{{j.1}}" value="{{i.tpl}}" placeholder="{{i.tpl}}"></td>
-                        <td><input name="{{j.2}}" value="{{i.l3}}" placeholder="{{i.l3}}"></td>
-                        <td><input name="{{j.3}}" value="{{i.l2}}" placeholder="{{i.l2}}"></td>
-                        <td><input name="{{j.4}}" value="{{i.l1}}" placeholder="{{i.l1}}"></td>
+                        <td><input  name="{{j.0}}" value="{{i.co}}" placeholder="{{i.co}}"></td>
+                        <td><input   name="{{j.1}}" value="{{i.tpl}}" placeholder="{{i.tpl}}"></td>
+                        <td><input   name="{{j.2}}" value="{{i.l3}}" placeholder="{{i.l3}}"></td>
+                        <td><input  name="{{j.3}}" value="{{i.l2}}" placeholder="{{i.l2}}"></td>
+                        <td><input  name="{{j.4}}" value="{{i.l1}}" placeholder="{{i.l1}}"></td>
                     </tr>
                     {% endfor %}
                    
@@ -378,10 +410,11 @@
 
                 
             </div>
+            <br>
             <div id="lectureplan">
-                <h2 class="lessonplan heads">lecture Plan</h2>
+                <center><h4 class="lessonplan heads">lecture Plan</h4></center>
                 {% for i,a in lstF %}
-                <table border="1" cellpadding="15px" width="90%" class="costable" id="tb{{a}}">
+                <table border="1" class="costable" id="tb{{a}}" style="table-layout: fixed;width: 100%;border: 1px solid black;">
                     <thead>
                         <td>S.No</td>
                         <td>Course Outcome</td>
@@ -393,28 +426,31 @@
                     </thead>
                     {% for j,k in i %}
                     <tr id="co{{a}}trm{{j.sno}}">
-                        <td><input name="{{k.0}}" value="{{j.sno}}" placeholder="{{j.sno}}"></td>
-                        <td><input name="{{k.1}}" value="{{j.course_outcome}}" placeholder="{{j.course_outcome}}"></td>
-                        <td class="align_left"><input name="{{k.2}}" value="{{j.ilo}}" placeholder="{{j.ilo}}"></td>
-                        <td><input name="{{k.3}}" value="{{j.knowledgelevel}}" placeholder="{{j.knowledgelevel}}"></td>
-                        <td><input name="{{k.4}}" value="{{j.noof_hours}}" placeholder="{{j.noof_hours}}"></td>
-                        <td class="align_left"><input name="{{k.5}}" value="{{j.pedagogy}}" placeholder="{{j.pedagogy}}"></td>
-                        <td class="align_left"><input name="{{k.6}}" value="{{j.teachingaids}}" placeholder="{{j.teachingaids}}"></td>
+                        <td ><input  name="{{k.0}}" value="{{j.sno}}" placeholder="{{j.sno}}"></td>
+                        <td><input  name="{{k.1}}" value="{{j.course_outcome}}" placeholder="{{j.course_outcome}}"></td>
+                        <td ><input  name="{{k.2}}" value="{{j.ilo}}" placeholder="{{j.ilo}}"></td>
+                        <td><input  name="{{k.3}}"  value="{{j.knowledgelevel}}" placeholder="{{j.knowledgelevel}}"></td>
+                        <td><input  name="{{k.4}}"  value="{{j.noof_hours}}" placeholder="{{j.noof_hours}}"></td>
+                        <td><input name="{{k.5}}" value="{{j.pedagogy}}" placeholder="{{j.pedagogy}}"></td>
+                        <td ><input  name="{{k.6}}" value="{{j.teachingaids}}" placeholder="{{j.teachingaids}}"></td>
                     </tr>
                     {% endfor %}
                     
                 </table>
-                <input name="tempinp{{a}}" id="tempinp{{a}}">
-                <div id="id{{a}}" class="adding_button">+ADD</div>
-                    <div id="rm{{a}}" class="remove_button">-Remove</div>
+                <input  class="non" name="tempinp{{a}}" id="tempinp{{a}}">
+                <div class="xyz">
+                    <div id="id{{a}}" class="adding_button btn btn-primary">+ ADD</div>&nbsp;&nbsp;&nbsp;
+                    <div id="rm{{a}}" class="remove_button btn btn-primary">- Remove</div>
+                </div>
                 {% endfor %}
                
             </div>
+            <br>
             <div id="co-psomatrix">
-                <h2 class="lessonplan heads">Co-Po&CO-PSO Matrix</h2>
-                <table border="1" width="70%" cellpadding="7px">
+                <center><h4 class="lessonplan heads">Co-Po&CO-PSO Matrix</h4></center>
+                <table border="1" style="table-layout: fixed;width: 100%;border: 1px solid black;" class="tab">
                     <thead>
-                        <td>Cos/Pos,Psos</td>
+                        <td>Cos/Pos</td>
                         <td>PO1</td>
                         <td>PO2</td>
                         <td>PO3</td>
@@ -434,7 +470,7 @@
                     <tr>
                         <td><input name="{{j.0}}" value="{{i.cos}}" placeholder="{{i.cos}}"></td>
                         <td><input name="{{j.1}}" value="{{i.po1}}" placeholder="{{i.po1}}"></td>
-                        <td><input name="{{j.2}}" value="{{i.po2}}" placeholder="{{i.po2}}"></td>
+                        <td><input  name="{{j.2}}" value="{{i.po2}}" placeholder="{{i.po2}}"></td>
                         <td><input name="{{j.3}}" value="{{i.po3}}" placeholder="{{i.po3}}"></td>
                         <td><input name="{{j.4}}" value="{{i.po4}}" placeholder="{{i.po4}}"></td>
                         <td><input name="{{j.5}}" value="{{i.po5}}" placeholder="{{i.po5}}"></td>
@@ -446,14 +482,15 @@
                         <td><input name="{{j.11}}" value="{{i.po11}}" placeholder="{{i.po11}}"></td>
                         <td><input name="{{j.12}}" value="{{i.po12}}" placeholder="{{i.po12}}"></td>
                         <td><input name="{{j.13}}" value="{{i.pso1}}" placeholder="{{i.pso1}}"></td>
-                        <td><input name="{{j.14}}" value="{{i.pso2}}" placeholder="{{i.pso2}}"></td>
+                        <td><input  name="{{j.14}}" value="{{i.pso2}}" placeholder="{{i.pso2}}"></td>
                     </tr>
                     {% endfor %}
                 </table>
             </div>
+            <br>
             <div id="course_end_survey_questionaire">
-                <h2 class="lessonplan heads">Course End Survey questionaire</h2>
-                <table border="1" cellpadding="12px" width="90%">
+               <center><h4 class="lessonplan heads">Course End Survey questionaire</h4></center>
+                <table style="table-layout: fixed;width: 100%;border: 1px solid black;" class="coe" >
                     <thead>
                         <td>SNO</td>
                         <td>COs</td>
@@ -461,7 +498,7 @@
                     </thead>
                     {% for i,j in questionF%}
                     <tr>
-                        <td><input name="{{j.0}}" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
+                        <td><input  name="{{j.0}}" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
                         <td><input name="{{j.1}}" value="{{i.cos}}" placeholder="{{i.cos}}"></td>
                         <td class="align_left"><input name="{{j.2}}" value="{{i.question}}" placeholder="{{i.question}}"></td>
                     </tr>
@@ -469,9 +506,10 @@
                     
                 </table>
             </div>
+            <br>
             <div id="details_of_course_instructor">
-                <h2 class="lessonplan heads">Details of Course Instructor</h1>
-                <table border="1" width="80%" cellpadding="30px">
+               <center> <h4 class="lessonplan heads">Details of Course Instructor</h1></center>
+                <table border="1" class="dof" style="table-layout: fixed;width: 100%;border: 1px solid black;" >
                     <thead>
                         <td>S.No</td>
                         <td >Name of the Course Instructor</td>
@@ -485,9 +523,9 @@
                    
                     {% for i in instructor%}
                     <tr>
-                        <td><input name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
+                        <td><input  name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
                         <td><input name="insname" value="{{i.name}}" placeholder="{{i.name}}"></td>
-                            <td><input name="insdes" value="{{i.designation}}" placeholder="{{i.designation}}"></td>
+                            <td><input  name="insdes" value="{{i.designation}}" placeholder="{{i.designation}}"></td>
                         <td><input name="insyear" value="{{i.year}}" placeholder="{{i.year}}"></td>
                         <td><input name="inssec" value="{{i.section}}" placeholder="{{i.section}}"></td>
                         <td><input name="inscno" value="{{i.contactno}}" placeholder="{{i.contactno}}"></td>
@@ -496,14 +534,14 @@
                     </tr>
                     {% endfor %}
                 </table>
-                <h2 class="below_heading signs">Name of the Course Coordinator (with Designation):{{i.name}},{{i.designation}}</h2>
-                <h2 class="below_heading signs">Signature of the Course Coordinator:</h2>
-                <h2 class="below_heading signs">Signature of the Module Coordinator:</h2>
-                <h2 class="below_heading signs">Signature of the Head of the Department:</h2>
+                <br>
+                <br>
+                <h4 class="below_heading signs">Name of the Course Coordinator (with Designation):{{i.name}},{{i.designation}}</h4><br>
+                <h4 class="below_heading signs">Signature of the Course Coordinator:</h4><br>
+                <h4 class="below_heading signs">Signature of the Module Coordinator:</h4><br>
+                <h4 class="below_heading signs">Signature of the Head of the Department:</h4><br>
             </div>
-            <!-- <button class="hidden-print printbut" onClick="window.print()">PDF</button>
-            <button class="hidden-print printbut" onclick="exportHTML()">Word</button> -->
-            <div class="empty"></div>
+           
         </div>
     </td>
     </tr>
@@ -516,7 +554,8 @@
         </tr>
     </tfoot>
 </table>
-<input type="submit" name="submit">
+<center>
+<input type="submit" style="width: 100px;" class="btn btn-primary" name="submit"></center>
 </form>
 <script>
     /* function Export2Word(cls)
@@ -748,7 +787,7 @@ function referencebook(){
  }
 }
      </script>
+    {% endblock %}
         </body>
 
     
-</html>

@@ -1,5 +1,7 @@
 <html>
     <head>
+<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             *{
     font-family: 'Open Sans', sans-serif;
@@ -231,6 +233,7 @@ span{
     padding-right: 30px;
 }
 /******************************/
+
 #courseoutcomes{
     display: none;
 }
@@ -319,6 +322,11 @@ td{
     width:250px;
     height:40px;
 }
+.xyz{
+    display: flex;
+    margin: 10px;
+}
+
    
 
 
@@ -1087,145 +1095,8 @@ function referencebook(){
                 <div onclick="numco()" id="submits">submit</div>
             </center>
             </div>
-            <div id="maindiv" >
-        <div id="main">
-            <div id="lesson_plan_details">
-                <table width="90%" >
-                    <tr>
-                        <td><h3>Batch:<span>*</span></h3></td>
-                        <td class="inputdiv_space"><input type="text" name="batch" id="batch" class="lesson_plan_details_inputdiv" required></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><h3>AcademicYear:<span>*</span></h3></td>
-                        <td class="inputdiv_space"><input type="text" name="academicyear" id="academicyear" class="lesson_plan_details_inputdiv" required></td>
-                        <td><h3>Programme:<span>*</span></h3></td>
-                        <td><input type="text" name="programme" id="programme" class="lesson_plan_details_inputdiv" required></td>
-                    </tr>
-                    <tr>
-                        <td><h3>Semester:<span>*</span></h3></td>
-                        <td class="inputdiv_space"><input type="text" name="semester" id="semester" class="lesson_plan_details_inputdiv" list="sem" required>
-                        <datalist id="sem">
-                            <option value="I Sem"></option>
-                            <option value="II Sem"></option>
-                            <option value="III Sem"></option>
-                            <option value="IV Sem"></option>
-                            <option value="V Sem"></option>
-                            <option value="VI Sem"></option>
-
-                        </datalist>
-                        </td>
-                        
-                        <td><h3>Section:<span>*</span></h3></td>
-                        <td><input type="text" name="section" id="section" class="lesson_plan_details_inputdiv" list="sec">
-                            <datalist id="sec">
-                                <option value="CSE"></option>
-                                <option value="CST"></option>
-                                <option value="CSE(AI)"></option>
-                                <option value="CSE(AIML)"></option>
-                                <option value="EEE"></option>
-                                <option value="ECT"></option>
-                                <option value="ECE"></option>
-                                <option value="CIVIL"></option>
-                                <option value="ME"></option>
-                            </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><h3>Name of the course:<span>*</span></h3></td>
-                        <td class="inputdiv_space"><input type="text" name="nameofthecourse" id="nameofthecourse" class="lesson_plan_details_inputdiv" required></td>
-                        <td><h3>Course Code:<span>*</span></h3></td>
-                        <td><input type="text" name="coursecode" id="coursecode" class="lesson_plan_details_inputdiv" required></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="courseoutcomes">
-                <h1>Course Outcomes</h1>
-                <table border="1" width="90%" id="coursetable">
-                    <thead>
-                        <td width="10%"><h3>CO<span>*</span></h3></td>
-                        <td width="70%"><h3>Course Outcomes<span>*</span></h3></td>
-                        <td width="10%"><h3>knowledge Level<span>*</span></h3></td>
-                    </thead>
-                </table>
-            </div>
-            <div id="textbooks">
-                <input type="text" name="copytexbook" value="1" class="copy" placeholder="1" id="copytb">
-                <h1>TextBooks</h1>
-                <table border="1"  width="90%" id="textbook_table">
-                    <thead>
-                        <td width="8%"><h3>S.no</h3></td>
-                        <td width="82%"><h3>Name & details of the textbook<span>*</span></h3></td>
-                    </thead>
-                    <tr>
-                        <td >1</td>
-                        <td><input type="text" class="textbooks_inputdiv" name="tb1" required></td>
-                    </tr>
-                </table>
-                <div class="adding_button" onclick="textbook()"><center>+ADD</center></div>
-                <div onclick="rmtb()" class="remove_button"><center> REMOVE</center></div>
-            </div>
-            <div id="referencebooks">
-                <input type="text" name="copyreferencebook" value="1" class="copy" placeholder="1" id="copyrb">
-                <h1>Reference Books</h1>
-                <table border="1"  width="90%" id="referencebook_table">
-                    <thead>
-                        <td width="8%"><h3>S.no</h3></td>
-                        <td width="82%"><h3>Name & details of the ReferenceBook<span>*</span></h3></td>
-                    </thead>
-                    <tr>
-                        <td >1</td>
-                        <td><input type="text" class="referencebook_inputdiv" name="rb1" required></td>
-                    </tr>
-                </table>
-                <div class="adding_button" onclick="referencebook()"><center>+ADD</center></div>
-                <div onclick="rmrb()" class="remove_button"><center> REMOVE</center></div>
-            </div>
-            <div id="targetproficiency">
-                <center>
-                    <h1>Tareget proficiency and Attainment Levels(for each course):</h1>
-                </center>
-            </div>
-
-            <div class="dytables">
-               <center><h1>lecture plan</h1></center> 
-            </div>
-            <div id="lectureplan"></div>
-            <div id="co-psomatrix">
-                <h1>Co-Po&CO-PSO Matrix</h1>
-                <table border="1" width="90%" id="co-psomatrixx">
-                    <thead>
-                        <td width="10%" height="50px">Cos/Pos,Psos</td>
-                        <td width="10%" height="50px">PO1<span>*</span></td>
-                        <td width="10%" height="50px">PO2<span>*</span></td>
-                        <td width="10%" height="50px">PO3<span>*</span></td>
-                        <td width="10%" height="50px">PO4<span>*</span></td>
-                        <td width="10%" height="50px">PO5<span>*</span></td>
-                        <td width="10%" height="50px">PO6</td>
-                        <td width="10%" height="50px">PO7</td>
-                        <td width="10%" height="50px">PO8</td>
-                        <td width="10%" height="50px">PO9</td>
-                        <td width="10%" height="50px">PO10</td>
-                        <td width="10%" height="50px">PO11</td>
-                        <td width="10%" height="50px">PO12<span>*</span></td>
-                        <td width="10%" height="50px">psos1<span>*</span></td>
-                        <td width="10%" height="50px">psos2</td>
-                    </thead>
-                </table>
-            </div>
-            <div id="course_end_survey_questionaire">
-                <h1>Course End Survey questionaire</h1>
-            </div>
-            <div id="details_of_course_instructor">
-                <h1>Details of Course Instructor</h1>
-            </div>
             
-        </div>
-        <div>
-            <center><input type="submit" name="submit" id="submitl"></center> 
-         </div>
-    </form>
+            
     
 
 </div>
