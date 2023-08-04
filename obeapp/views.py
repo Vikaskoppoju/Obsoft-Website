@@ -25,7 +25,7 @@ def user_login(request):
     if request.user.is_authenticated:
         # print("$$$$$$$$$$$$$$")
         # userid = request.POST['unamef']
-        return redirect(faculty_dashboard)
+        return render(request, 'obeapp/faculty/faculty_dashboard.html')
     if request.method == "POST":
         userid = request.POST['unamef']
         pswd = request.POST['pswdf']
@@ -38,7 +38,7 @@ def user_login(request):
                         login(request, obj)
                         print("******************")
                         request.session['user_id'] = userid
-                        return redirect(faculty_dashboard)
+                        return render(request, 'obeapp/faculty/faculty_dashboard.html')
                    else:
                         print("error")
                         messages.error(request,'invalid passwod please try again')
