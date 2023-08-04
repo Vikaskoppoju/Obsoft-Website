@@ -78,14 +78,15 @@ WSGI_APPLICATION = 'obesoft.wsgi.application'
 # DATABASES = {
 #      'default': {
         
-#          # 'ENGINE': 'django.db.backends.sqlite3',
-#          # 'NAME': BASE_DIR / 'db.sqlite3',
-#          'ENGINE': 'django.db.backends.mysql',
-#          'NAME': 'obsoft2',
-#          'USER':'root',
-#         'PASSWORD':'jaga@6493',
-#          'HOST':'127.0.0.1',
-#          'port':'3306'
+         # 'ENGINE': 'django.db.backends.sqlite3',
+         # 'NAME': BASE_DIR / 'db.sqlite3',
+        #  'ENGINE': 'django.db.backends.mysql',
+        #  'NAME': 'obsoft2',
+        #  'USER':'root',
+        # 'PASSWORD':'sushma562341kurella',
+        # 'PASSWORD':'jaga@6493',
+        #  'HOST':'127.0.0.1',
+        #  'port':'3306'
 
         
 #      }
