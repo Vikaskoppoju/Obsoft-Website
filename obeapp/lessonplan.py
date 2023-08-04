@@ -257,6 +257,8 @@ def viewplan(request):
         instructor=details_of_instructors.objects.filter(course_code=coursecode)
         d={'branch':branch,'bat':bat,'result_co':result_co,'textbook':textbook,'rfbook':rfbook,'tp':tp,'lst':lst,'copsomat':copsomat,'question':question,'instructor':instructor,'l':l}
         return render(request,'obeapp/obapp/viewplan.html',d)
+
+@login_required(login_url='/user_login')
 def inputcoursecode(request):
      # print(request.session.get('user_id', None))
      obj = CustomUser.objects.get(Biometricid=str(request.session.get('user_id', None)))
