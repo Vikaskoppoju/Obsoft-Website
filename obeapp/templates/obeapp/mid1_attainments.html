@@ -1,0 +1,530 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Mid1 Attainments
+        </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="http://github.com/aadel112/googoose/jquery.googoose.js"></script>
+        <style>
+            *{
+                /*font-family: 'Open Sans', sans-serif;*/
+                font-family: serif;
+                margin: 0;
+            }
+            #maindiv{
+                width:80%;
+                border-color: blue;
+                border-style: groove;
+                /*position: relative;*/
+                margin:auto;
+            }
+            #lesson_plan_details{
+                position: relative;
+                margin-top:30px;
+                margin-left: 20px;
+            }
+            
+            .lesson_plan_details_inputdiv{
+                width: 300px;
+                height: 30px;
+                position: relative;
+                bottom: 5px;
+                border-style: groove;
+                border-color: black;
+                border-radius: 5px;
+            }
+            .input_div{
+                margin-right: 30px;
+                padding-right: 100px;
+            }
+            #header{
+                font-family: serif;
+            }
+            .heading1{
+                font-size: 25;
+                position: relative;
+                margin-top:50px;
+                margin-bottom:0;
+                
+            }
+            .heading2{
+                font-size: 15;
+                font-weight: 300;
+            }
+            .heading3{
+                font-size: 20;
+            }
+            hr{
+                background-color: black;
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #hrdownline{
+                position: relative;
+                top:0;
+                background-color: black;
+            }
+            #hrdownline1{
+                position: relative;
+                margin-bottom: 10px;  
+                background-color: black;
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            #head3{
+                position: relative;
+                margin-bottom: 10px;
+                
+            }
+            #head2{
+                position: relative;
+                color: #404258;
+                /*margin-bottom: 10px;*/
+            }
+            #head1{
+                position: relative;
+                margin-bottom:10px;
+            }
+            img{
+                position: relative;
+                margin-top:20px;
+                margin-right: 20px;
+            }
+            .lesson_plan_details_row{
+                display: flex;
+                flex-wrap: wrap;
+                color: black;
+                margin: 10px;
+            }
+            .lesson_plan_details_table{
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .batch_h3{
+                font-weight: 700;
+                font-size: 20;
+            }
+            .batch_h3_details{
+                font-weight: 400;
+                font-size: 20;
+            }
+            .lessonplan{
+                position:relative;
+                margin-top: 40px;
+            }
+            .heads{
+                position: relative;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            #courseoutcomes{
+                position: relative;
+                padding-left:225px;
+            }
+            #courseoutcomes,#textbooks,#referencebooks,#targetproficiency,#lectureplan,#co-psomatrix,#course_end_survey_questionaire,#details_of_course_instructor{
+                position: relative;
+                padding-left:130px; 
+            }
+            #courseoutcomes.table.tbody,#textbooks.table.tbody,#referencebooks.table.tbody,#targetproficiency.table.tbody,#lectureplan.table.tbody,#co-psomatrix.table.tbody,#course_end_survey_questionaire.table.tbody,#details_of_course_instructor.table.tbody{
+                text-align: center; 
+            }
+            thead{
+                font-weight: 600;
+                font-size: 20;
+            }
+            tbody{
+                font-weight: 400;
+                font-size: 20;
+            }
+            table,td,th{
+                border-collapse:collapse ;
+                /*text-align: center;*/
+            }
+            .tb_rb{
+                border-style: none;
+            }
+            .below_heading{
+                font-weight: 400;
+                font-size: 20; 
+                margin-top: 8px;
+                margin-bottom: 8px;
+                
+            }
+            .align_left{
+                text-align: left;
+            }
+            .costable{
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+            .signs{
+                padding-top: 30px;
+                padding-bottom: 20px;
+            }
+            .printbut{
+                width: 150px;
+                height: 50px;
+                font-size: 20;
+                font-weight: 400;
+                border-style: none;
+                border-radius: 15px;
+                background: #E91E63;
+                color: aliceblue;
+                position: relative;
+                margin-left: 1200px;
+                margin-bottom: 100px;
+            }
+            .printbut:hover{
+                cursor: pointer;
+            }
+            .empty{
+                height: 100px;
+                width: 100%;
+            }
+            .outertable{
+                padding: 0;
+                margin: 0;
+            }
+            .secondhr{
+                margin-bottom: 20px;
+                width: 80%;
+            }
+            .hr123{
+                width:85%;
+            }
+            .footer{
+                width: 100%;
+                height: 10px;
+            }
+
+@media print {
+  
+  .hidden-print{
+  display: none;
+  }
+  .hr123{
+                width:80%;
+            }
+  #courseoutcomes,#textbooks,#referencebooks,#targetproficiency,#lectureplan,#co-psomatrix,#course_end_survey_questionaire,#details_of_course_instructor{
+                position: relative;
+                padding-left:110px; 
+            }
+
+}
+      /*     @page {
+             size: A4;
+             margin: 11mm 17mm 17mm 17mm;
+             }
+
+@media print {
+   header {
+    position: fixed;
+    top: 0;
+    overflow: avoid;
+  }
+  .maindiv{
+    page-break-inside: avoid;
+  }
+  
+  .hidden-print{
+  display: none;
+}
+}*/
+
+            
+        </style>
+    </head>
+    <body>
+        <script>
+       /* function Export2Word(cls)
+{
+    /*var div = document.createElement("div");
+    div.id = "export-content";
+    div.innerHTML = "<p>this is going to be paragraph </p>";
+    document.body.appendChild(div);
+    $("cls").wordExport();
+}*/
+
+    function exportHTML(){
+       var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+       var footer = "</body></html>";
+       var sourceHTML = header+document.getElementById("outertable").innerHTML+footer;
+       
+       var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+       var fileDownload = document.createElement("a");
+       document.body.appendChild(fileDownload);
+       fileDownload.href = source;
+       fileDownload.download = 'document.doc';
+       fileDownload.click();
+       document.body.removeChild(fileDownload);
+    }
+        </script>
+        <table class="outertable" id="outertable">
+            <thead>
+                <tr>
+                    <td>
+        <header class="header-info">
+        <div id="header">
+            <center>
+            <table >
+            <tr>
+                <td id="image">
+            <img src="https://github.com/obsoftteam/obe_finalproject/blob/main/WhatsApp%20Image%202023-07-28%20at%209.54.02%20AM.jpeg?raw=true"  alt="home" width="100px" height="100px"/>
+            </td>
+            <td >
+                <center>
+            <h1 class="heading1"id="head1">SRI VASAVI ENGINEERING COLLEGE(AUTONAMOUS)</h1>
+            <h3 class="heading2" id="head2">PEDATADEPALLI TADEPALLIGUDEM-534101</h3>
+            <h2 class="heading3" id="head3">Department of {{branch}}</h2>
+            </center>
+            </tr>
+            </tr>
+            
+        </table>
+    
+        
+    </center>
+    </div>
+    <div style="height:8px" id="hrdownline1"></div>
+    <hr class="secondhr">
+        </div>
+    </header>
+</td>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+<div class="maindiv">
+    <!-- <center>
+        <h2 id="lessonplan">Lesson Plan</h2>
+    </center> -->
+            <div id="lesson_plan_details">
+                <table width="80%" class="lesson_plan_details_table" >
+                    <tr>
+                        <td width="60%" ><div class="lesson_plan_details_row"><h3 class="batch_h3">Batch:</h3></h3><h3 class="batch_h3_details">{{bat.batch}}</h3></div></td>
+                        <td width="30%" ></td>
+                    </tr>
+                    <tr >
+                        <td><div class="lesson_plan_details_row"><h3 class="batch_h3">AcademicYear:</h3><h3 class="batch_h3_details">{{bat.academicyear}}</div></td>
+                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Programme:</h3><h3 class="batch_h3_details">{{bat.programme}}</div></td>
+                    </tr>
+                    <tr >
+                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Semester:</h3><h3 class="batch_h3_details">{{bat.semester}}</h3></div></td>
+                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Section:</h3><h3 class="batch_h3_details">{{bat.section}}</h3></div></td>
+                    </tr>
+                    <tr >
+                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Name of the course:</h3><h3 class="batch_h3_details">{{bat.name_of_the_course}}</h3></div></td>
+                        <td ><div class="lesson_plan_details_row"><h3 class="batch_h3">Course Code:</h3><h3 class="batch_h3_details">{{bat.course_code}}</h3></div></td>
+                    </tr>
+                </table>
+            </div>
+        <hr class="hr123">
+            <div id="courseoutcomes">
+                <h2 class="lessonplan">Course Outcomes (Along With Knowleddge Level):</h2>
+                <h2 class="below_heading">After Completion of this course, the student will be able to:</h2>
+                <table border="1" cellpadding="20px" width="90%">
+                    <thead>
+                        <td>CO</td>
+                        <td>Course Outcomes</td>
+                        <td>knowledge Level</td>
+                    </thead>
+                    {% for i in result_co %}
+                    <tr>
+                        <td>{{i.co}}</td>
+                        <td class="align_left">{{i.courseoutcome}}</td>
+                        <td>{{i.knowledge_level}}</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+        
+            <div id="textbooks">
+                <h2 class="lessonplan heads">TextBooks</h2>
+                <table border="0" cellpadding="10px" width="90%" class="tb_rb">
+                    {% for i in textbook%}
+                    <tr>
+                        <td>{{i.sno}}</td>
+                        <td class="align_left">{{i.textbook_details}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="referencebooks">
+                <h2 class="lessonplan heads">Reference Books</h2>
+                <table border="0" cellpadding="10px" width="90%" class="tb_rb">
+                    {% for i in rfbook %}
+                    <tr>
+                        <td>{{i.sno}}</td>
+                        <td class="align_left">{{i.rfbook_details}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="targetproficiency">
+                <h2 class="lessonplan heads">targetproficiency and attainment Levels(for each course outcome)</h2>
+                <table border="1" cellpadding="10px" width="90%">
+                    <thead>
+                        <td>Cos</td>
+                        <td>targetproficiencylevel</td>
+                        <td>level3</td>
+                        <td>level2</td>
+                        <td>level1</td>
+                    </thead>
+                    {% for i in tp %}
+                    <tr>
+                        <td>{{i.co}}</td>
+                        <td>{{i.tpl}}</td>
+                        <td>{{i.l3}}</td>
+                        <td>{{i.l2}}</td>
+                        <td>{{i.l1}}</td>
+                    </tr>
+                    {% endfor %}
+                   
+
+                </table>
+
+                
+            </div>
+            <div id="lectureplan">
+                <h2 class="lessonplan heads">lecture Plan</h2>
+                {% for i in lst %}
+                <table border="1" cellpadding="15px" width="90%" class="costable">
+                    <thead>
+                        <td>S.No</td>
+                        <td>Course Outcome</td>
+                        <td>Intended Learning outcomes(ILO)</td>
+                        <td>Knowledge Level of ILO</td>
+                        <td>No.of hours Required</td>
+                        <td>pedagogy</td>
+                        <td>teaching aids</td>
+                    </thead>
+                    {% for j in i %}
+                    <tr>
+                        <td>{{j.sno}}</td>
+                        <td>{{j.course_outcome}}</td>
+                        <td class="align_left">{{j.ilo}}</td>
+                        <td>{{j.knowledgelevel}}</td>
+                        <td>{{j.noof_hours}}</td>
+                        <td class="align_left">{{j.pedagogy}}</td>
+                        <td class="align_left">{{j.teachingaids}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endfor %}
+               
+            </div>
+            <div id="co-psomatrix">
+                <h2 class="lessonplan heads">Co-Po&CO-PSO Matrix</h2>
+                <table border="1" width="70%" cellpadding="7px">
+                    <thead>
+                        <td>Cos/Pos,Psos</td>
+                        <td>PO1</td>
+                        <td>PO2</td>
+                        <td>PO3</td>
+                        <td>PO4</td>
+                        <td>PO5</td>
+                        <td>PO6</td>
+                        <td>PO7</td>
+                        <td>PO8</td>
+                        <td>PO9</td>
+                        <td>PO10</td>
+                        <td>PO11</td>
+                        <td>PO12</td>
+                        <td>psos1</td>
+                        <td>psos2</td>
+                    </thead>
+                    {% for i in copsomat %}
+                    <tr>
+                        <td>{{i.cos}}</td>
+                        <td>{{i.po1}}</td>
+                        <td>{{i.po2}}</td>
+                        <td>{{i.po3}}</td>
+                        <td>{{i.po4}}</td>
+                        <td>{{i.po5}}</td>
+                        <td>{{i.po6}}</td>
+                        <td>{{i.po7}}</td>
+                        <td>{{i.po8}}</td>
+                        <td>{{i.po9}}</td>
+                        <td>{{i.po10}}</td>
+                        <td>{{i.po11}}</td>
+                        <td>{{i.po12}}</td>
+                        <td>{{i.pso1}}</td>
+                        <td>{{i.pso2}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="course_end_survey_questionaire">
+                <h2 class="lessonplan heads">Course End Survey questionaire</h2>
+                <table border="1" cellpadding="12px" width="90%">
+                    <thead>
+                        <td>SNO</td>
+                        <td>COs</td>
+                        <td>Question</td>
+                    </thead>
+                    {% for i in question%}
+                    <tr>
+                        <td>{{i.sno}}</td>
+                        <td>{{i.cos}}</td>
+                        <td class="align_left">{{i.question}}</td>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+            <div id="details_of_course_instructor">
+                <h2 class="lessonplan heads">Details of Course Instructor</h1>
+                <table border="1" width="80%" cellpadding="30px">
+                    <thead>
+                        <td>S.No</td>
+                        <td >Name of the Course Instructor with designation</td>
+                        <td>Year/Section</td>
+                        <td >Contact No & e-mail:</td>
+                        <td>Signature of Course Instructor</td>
+                    </thead>
+                    {% for i in instructor%}
+                    <tr>
+                        <td>{{i.sno}}</td>
+                        <td>{{i.name}},<br>{{i.designation}}</td>
+                        <td>{{i.year}},<br>{{i.section}}</td>
+                        <td>{{i.contactno}},<br>{{i.email}}</td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <h2 class="below_heading signs">Name of the Course Coordinator (with Designation):{{i.name}},{{i.designation}}</h2>
+                <h2 class="below_heading signs">Signature of the Course Coordinator:</h2>
+                <h2 class="below_heading signs">Signature of the Module Coordinator:</h2>
+                <h2 class="below_heading signs">Signature of the Head of the Department:</h2>
+            </div>
+            <button class="hidden-print printbut" onClick="window.print()">PDF</button>
+            <!-- <button class="hidden-print printbut" onclick="exportHTML()">Word</button> -->
+            <div class="empty"></div>
+        </div>
+    </td>
+    </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <div class="footer"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+        </body>
+
+    
+</html>

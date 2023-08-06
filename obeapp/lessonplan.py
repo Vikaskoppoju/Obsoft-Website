@@ -269,9 +269,11 @@ def viewplan(request):
 @login_required(login_url='/user_login')
 def inputcoursecode(request):
      # print(request.session.get('user_id', None))
-     obj = CustomUser.objects.get(Biometricid=str(request.session.get('user_id', None)))
-     codes = obj.Permissions.split(",")
-     return render(request,'obeapp/obapp/inputcoursecode.html',{'codes':codes})
+     if request.session.get('user_id', None):
+          obj = CustomUser.objects.get(Biometricid=str(request.session.get('user_id', None)))
+          codes = obj.Permissions.split(",")
+          return render(request,'obeapp/obapp/inputcoursecode.html',{'codes':codes})
+     return redirect('faculty_dashboard')
 @login_required(login_url='/user_login')
 def updatecoursecode(request):
      if request.session.get('user_id', None):

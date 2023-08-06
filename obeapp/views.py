@@ -36,7 +36,7 @@ def user_login(request):
                    obj=CustomUser.objects.get(Biometricid=userid)
                    if(obj.password==pswd):
                         login(request, obj)
-                        print("******************")
+                        print("******")
                         request.session['user_id'] = userid
                         return render(request, 'obeapp/faculty/faculty_dashboard.html')
                    else:
@@ -45,7 +45,7 @@ def user_login(request):
                         return render(request, 'obeapp/land.html')
 
         else:
-            print("in else of faculty login*******")
+            print("in else of faculty login***")
             return render(request, 'obeapp/land.html')
     else:
      return render(request, 'obeapp/land.html')
@@ -119,8 +119,14 @@ def admin_dashboard(request):
     return render(request, 'obeapp/admin/admin_dashboard.html')
 @login_required(login_url='/user_login')
 def faculty_dashboard(request):
-    print(" in faculty login*************************************")
-    return render(request, 'obeapp/faculty/faculty_dashboard.html')
+    try:
+        if request.session.get('user_id', None):
+            print(" in faculty login*************")
+            return render(request, 'obeapp/faculty/faculty_dashboard.html')
+        else:
+            return render(request, 'obeapp/land.html')
+    except:
+        return render(request, 'obeapp/land.html')
 def department_dashboard(request):
     return render(request, 'obeapp/department/department_admin.html')
 def course_view(request):
@@ -131,7 +137,7 @@ def dept_course_view(request):
     #  for i in obj.Permissions:
     #     codes.append(i.split(","))
      return render(request,'obeapp/department/course_view.html')
-def upload_course_atte(request):
+def uploadcourseattainments(request):
      return render(request,'obeapp/faculty/upload_course_atte.html')
 def course_attenment(request):
      return render(request,'obeapp/faculty/course_attenment.html')
@@ -159,7 +165,15 @@ def add_regulation(request):
             Reg.batch = batch
             Reg.save()
             reg = Regulation.objects.all()
-            return render(request, 'obeapp/admin/Regulations.html',{'reg':reg})
+            try:
+                mid1_marks_table(regulation)
+                mid2_marks_table(regulation)
+                sem_marks_table(regulation)
+                mid1_results_table(regulation)
+                mid2_results_table(regulation)
+                sem_results_table(regulation)
+            except:
+                return render(request, 'obeapp/admin/Regulations.html',{'reg':reg})
         else:
             messages.error(request,'Regulation already exists')
     return redirect(Regulations)
@@ -632,25 +646,25 @@ def sem_marks_table(reg):
 
     Book = book_schema.as_model()
 
-def mid1_marks_insert(name):
-    book_schema = ModelSchema.objects.get(name='v20mid1_marks')
+def mid1_marks_insert(filename,reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg)+'mid1_marks')
     Book = book_schema.as_model()
-    df1 = pd.read_excel(name)
+    df1 = pd.read_excel(filename)
     # print(df1)
     df2 = df1.drop(['Total Marks'], axis=1)
     # print(df2)
     m = list(df2.iloc[3])
     l = list(df2.iloc[2])
     print(l[2], m)
-    df = pd.read_excel(name, skiprows=[0, 1, 2, 3, 4])
+    df = pd.read_excel(filename, skiprows=[0, 1, 2, 3, 4])
     df.columns = ['sn', 'rno', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'total']
     # df['q2']=df['q2'].replace({'NaN':-1})
     df = df.fillna(-1)
     df = df.replace('A', -2)
-    branch = 'EEE'
-    course_code = 'V20EET02'
-    academic_year = '2021-22'
-    sem = 'IV'
+    branch = branch
+    course_code = coursecode
+    academic_year = acyear
+    sem = sem
     for i in df.index:
         f = Book.objects.create(roll_no=df['rno'][i], co1_a=df['q1'][i], co1_b=df['q2'][i], co1_c=df['q3'][i],
                                 co2_a=df['q4'][i], co2_b=df['q5'][i], co2_c=df['q6'][i], co3_a=df['q7'][i],
@@ -659,27 +673,27 @@ def mid1_marks_insert(name):
                                 co1_a_max=m[2], co1_b_max=m[3], co1_c_max=m[4], co2_a_max=m[5], co2_b_max=m[6],
                                 co2_c_max=m[7], co3_a_max=m[8], co3_b_max=m[9], co3_c_max=m[10])
         f.save()
+    calculate_mid1_results(reg,branch,sem,acyear,coursecode)
 
-
-def mid2_marks_insert(name):
-    book_schema = ModelSchema.objects.get(name='v20mid2_marks')
+def mid2_marks_insert(filename,reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg)+'mid2_marks')
     Book = book_schema.as_model()
-    df1 = pd.read_excel(name)
+    df1 = pd.read_excel(filename)
     # print(df1)
     df2 = df1.drop(['Total Marks'], axis=1)
     # print(df2)
     m = list(df2.iloc[3])
     l = list(df2.iloc[2])
     print(l[2], m)
-    df = pd.read_excel(name, skiprows=[0, 1, 2, 3, 4])
+    df = pd.read_excel(filename, skiprows=[0, 1, 2, 3, 4])
     df.columns = ['sn', 'rno', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'total']
     # df['q2']=df['q2'].replace({'NaN':-1})
     df = df.fillna(-1)
     df = df.replace('A', -2)
-    branch = 'EEE'
-    course_code = 'V20EET02'
-    academic_year = '2021-22'
-    sem = 'IV'
+    branch = branch
+    course_code = coursecode
+    academic_year = acyear
+    sem = sem
     for i in df.index:
         f = Book.objects.create(roll_no=df['rno'][i], co3_a=df['q1'][i], co3_b=df['q2'][i], co3_c=df['q3'][i],
                                 co4_a=df['q4'][i], co4_b=df['q5'][i], co4_c=df['q6'][i], co5_a=df['q7'][i],
@@ -689,11 +703,11 @@ def mid2_marks_insert(name):
                                 co4_c_max=m[7], co5_a_max=m[8], co5_b_max=m[9], co5_c_max=m[10])
         f.save()
 
-def sem_marks_insert(regname):
-    book_schema = ModelSchema.objects.get(name='v20sem_marks')
+def sem_marks_insert(filename,reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg)+'sem_marks')
     Book = book_schema.as_model()
-    df2 = pd.read_excel("C:/Users/jagad/Downloads/test.xlsx")
-    df = pd.read_excel("C:/Users/jagad/Downloads/test.xlsx",skiprows=4)
+    df2 = pd.read_excel(filename)
+    df = pd.read_excel(filename,skiprows=4)
     df.columns = ['sn', 'a11', 'a12', 'a13', 'b11', 'b12', 'b13', 'a21', 'a22', 'a23', 'b21', 'b22', 'b23', 'a31', 'a32', 'a33',
                   'b31','b32','b33','a41','a42','a43','b41','b42','b43','a51','a52','a53','b51','b52','b53','total']
     df = df.fillna(-1)
@@ -719,10 +733,10 @@ def sem_marks_insert(regname):
         rdf.loc[index+1] = temp
     maxmarks = list(df2.iloc[3])
     df = rdf
-    branch = 'EEE'
-    course_code = 'V20EET02'
-    academic_year = '2021-22'
-    sem = 'IV'
+    branch = branch
+    course_code = coursecode
+    academic_year = acyear
+    sem = sem
     for i in df.index:
         f = Book.objects.create(co1_a=df['q1'][i], co1_b=df['q2'][i], co1_c=df['q3'][i], co2_a=df['q4'][i],
                                 co2_b=df['q5'][i], co2_c=df['q6'][i], co3_a=df['q7'][i], co3_b=df['q8'][i],
@@ -735,24 +749,25 @@ def sem_marks_insert(regname):
                                 , co4_a_max=maxmarks[11], co4_b_max=maxmarks[12], co4_c_max=maxmarks[13],
                                 co5_a_max=maxmarks[14], co5_b_max=maxmarks[15], co5_c_max=maxmarks[16])
         f.save()
-    calculate_sem_results(regname, academic_year, course_code, branch)
+    calculate_sem_results(reg, branch,sem,acyear, coursecode)
 
-def calculate_mid1_results(regname):
-    book_schema = ModelSchema.objects.get(name=str(regname) + 'mid1_marks')
+def calculate_mid1_results(reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg) + 'mid1_marks')
     book = book_schema.as_model()
-    Book = book.objects.all()
+    Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
     attain, attem, per, attainper, attainlvl = [], [], [], [], []
     df = pd.DataFrame(Book.values_list(), columns=Book.values()[0])
+    # print(df)
     for i in range(1, 4):
         atnpr = []
         tp = targetproficiency.objects.get(course_code=df['course_code'][0], co="co" + str(i))
-        prflvl = int(tp.tpl)
+        prflvl = int(tp.tpl)/100
         for j in ['a', 'b', 'c']:
             maxmk = df['co' + str(i) + '_' + str(j) + '_max'][0]
             df1 = df[['co' + str(i) + '_' + str(j)]]
-            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (
-                        df1['co' + str(i) + '_' + str(j)] >= maxmk * prflvl)].count(axis=0))
+            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (df1['co' + str(i) + '_' + str(j)] >= maxmk * prflvl)].count(axis=0))
             atm = int(df1[df1['co' + str(i) + '_' + str(j)] >= 0].count(axis=0))
+            # print(atn,atm,maxmk*prflvl)
             atn1 = -1 if not atn and not atm else atn
             atm1 = -1 if not atm else atm
             attain.append(atn1)
@@ -763,16 +778,16 @@ def calculate_mid1_results(regname):
             else:
                 per.append(-1)
         attainper.append(round(sum(atnpr) / len(atnpr), 3))
-        if attainper[-1] > tp.l3:  # These level are taken  temporarly we should take form user
+        if attainper[-1] > float(tp.l3):  # These level are taken  temporarly we should take form user
             attainlvl.append(3)
-        elif attainper[-1] > tp.l2:
+        elif attainper[-1] > float(tp.l2):
             attainlvl.append(2)
-        elif attainper[-1] > tp.l1:
+        elif attainper[-1] > float(tp.l1):
             attainlvl.append(1)
         else:
             attainlvl.append(0)
     # print(type(attain[0]),attem,per)
-    mid1_schema = ModelSchema.objects.get(name=str(regname) + 'mid1')
+    mid1_schema = ModelSchema.objects.get(name=str(reg) + 'mid1')
     mid1 = mid1_schema.as_model()
     mid1.objects.create(branch=df['branch'][0], coursecode=df['course_code'][0], acyear=df['academic_year'][0],
                         sem=df['sem'][0],
@@ -785,23 +800,21 @@ def calculate_mid1_results(regname):
                         co1_atnper=attainper[0], co1_atnlvl=attainlvl[0], co2_atnper=attainper[1],
                         co2_atnlvl=attainlvl[1], co3_atnper=attainper[2], co3_atnlvl=attainlvl[2])
 
-
-def calculate_mid2_results(regname):
-    book_schema = ModelSchema.objects.get(name=str(regname) + 'mid2_marks')
+def calculate_mid2_results(reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg) + 'mid2_marks')
     book = book_schema.as_model()
-    Book = book.objects.all()
+    Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
     attain, attem, per, attainper, attainlvl = [], [], [], [], []
     df = pd.DataFrame(Book.values_list(), columns=Book.values()[0])
     for i in range(3, 6):
         atnpr = []
         tp = targetproficiency.objects.get(course_code=df['course_code'][0], co="co" + str(i))
-        prflvl = int(tp.tpl)
+        prflvl = int(tp.tpl)/100
         for j in ['a', 'b', 'c']:
             # prflvl = df['co'+str(i)+'_'+str(j)+'_proflvl'][0]
             maxmk = df['co' + str(i) + '_' + str(j) + '_max'][0]
             df1 = df[['co' + str(i) + '_' + str(j)]]
-            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (
-                        df1['co' + str(i) + '_' + str(j)] >= maxmk * prflvl)].count(axis=0))
+            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (df1['co' + str(i) + '_' + str(j)] >= maxmk * prflvl)].count(axis=0))
             atm = int(df1[df1['co' + str(i) + '_' + str(j)] >= 0].count(axis=0))
             atn1 = -1 if not atn and not atm else atn
             atm1 = -1 if not atm else atm
@@ -813,16 +826,16 @@ def calculate_mid2_results(regname):
             else:
                 per.append(-1)
         attainper.append(round(sum(atnpr) / len(atnpr), 3))
-        if attainper[-1] > tp.l3:  # These level are taken  temporarly we should take form user
+        if attainper[-1] > float(tp.l3):  # These level are taken  temporarly we should take form user
             attainlvl.append(3)
-        elif attainper[-1] > tp.l2:
+        elif attainper[-1] > float(tp.l2):
             attainlvl.append(2)
-        elif attainper[-1] > tp.l1:
+        elif attainper[-1] > float(tp.l1):
             attainlvl.append(1)
         else:
             attainlvl.append(0)
     # print(attain,attem,per)
-    mid2_schema = ModelSchema.objects.get(name=str(regname) + 'mid2')
+    mid2_schema = ModelSchema.objects.get(name=str(reg) + 'mid2')
     mid2 = mid2_schema.as_model()
     mid2.objects.create(branch=df['branch'][0], coursecode=df['course_code'][0], acyear=df['academic_year'][0],
                         sem=df['sem'][0],
@@ -835,10 +848,10 @@ def calculate_mid2_results(regname):
                         co3_atnper=attainper[0], co3_atnlvl=attainlvl[0], co4_atnper=attainper[1],
                         co4_atnlvl=attainlvl[1], co5_atnper=attainper[2], co5_atnlvl=attainlvl[2])
 
-def calculate_sem_results(regname, academicyear, coursecode, branch):
-    book_schema = ModelSchema.objects.get(name=str(regname) + 'sem_marks')
+def calculate_sem_results(reg,branch,sem,acyear,coursecode):
+    book_schema = ModelSchema.objects.get(name=str(reg) + 'sem_marks')
     book = book_schema.as_model()
-    Book = book.objects.all()
+    Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
     attain, attem, per, attainper, attainlvl = [], [], [], [], []
     df = pd.DataFrame(Book.values_list(), columns=Book.values()[0])
     coursecode = df['course_code'][0]
@@ -846,15 +859,13 @@ def calculate_sem_results(regname, academicyear, coursecode, branch):
     for i in range(1, 6):
         atnpr = []
         tp = targetproficiency.objects.get(course_code=coursecode, co="co" + str(i))
-        prflvl = int(tp.tpl)
+        prflvl = int(tp.tpl)/100
         # print(prflvl)
         for j in ['a', 'b', 'c']:
 
             maxmk = df['co' + str(i) + '_' + str(j) + '_max'][0]
             df1 = df[['co' + str(i) + '_' + str(j)]]
-            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (
-                        
-                        df1['co' + str(i) + '_' + str(j)] > maxmk * prflvl)].count(axis=0))
+            atn = int(df1[(df1['co' + str(i) + '_' + str(j)] >= 0) & (df1['co' + str(i) + '_' + str(j)] > maxmk * prflvl)].count(axis=0))
             # print(df1['co'+str(i)+'_'+str(j)],"##",maxmk*prflvl)
             atm = int(df1[df1['co' + str(i) + '_' + str(j)] >= 0].count(axis=0))
             atn1 = -1 if not atn and not atm else atn
@@ -867,17 +878,17 @@ def calculate_sem_results(regname, academicyear, coursecode, branch):
             else:
                 per.append(-1)
         attainper.append(round(sum(atnpr) / len(atnpr), 3))
-        if attainper[-1] > tp.l3:  # These level are taken  temporarly we should take form user
+        if attainper[-1] > float(tp.l3):  # These level are taken  temporarly we should take form user
             attainlvl.append(3)
-        elif attainper[-1] > tp.l2:
+        elif attainper[-1] > float(tp.l2):
             attainlvl.append(2)
-        elif attainper[-1] > tp.l1:
+        elif attainper[-1] > float(tp.l1):
             attainlvl.append(1)
         else:
             attainlvl.append(0)
     # print(attainper)
 
-    sem_schema = ModelSchema.objects.get(name=str(regname) + 'sem')
+    sem_schema = ModelSchema.objects.get(name=str(reg) + 'sem')
     sem = sem_schema.as_model()
     sem.objects.create(branch=df['branch'][0], coursecode=df['course_code'][0], academicyear=df['academic_year'][0],
                        sem=df['sem'][0],
@@ -909,11 +920,24 @@ def course_marks(request):
 def storeinput(request):
     if request.method == 'POST':
         nm = request.FILES['file']
-        mid1_marks_insert(nm)
-        mid2_marks_insert(nm)
+        acyear = request.POST["acyear"]
+        coursecode = request.POST["coursecode"]
+        regulation = request.POST['reg']
+        branch = request.POST["branch"]
+        sem = request.POST["sem"]
+        exam = request.POST["exam_type"]
+        if exam=="mid1":
+            print("hereeeee")
+            mid1_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
+        elif exam=="mid2":
+            mid2_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
+        elif exam=="sem":
+            sem_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
     else:
-        return redirect('login')
-    return render(request, 'obeapp/obapp/storeinput2.html')
+        return redirect(uploadcourseattainments)
+    return render(request, 'obeapp/faculty/course_attenment.html')
+def viewattainments(request):
+    return render(request,"obeapp/faculty/view_attainments.html")
 
 
 # mid1_marks_table('v20')
