@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'obesoft.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
      'default': {
         
         #  'ENGINE': 'django.db.backends.sqlite3',
@@ -90,11 +90,11 @@ DATABASES = {
 
         
      }
- }
-# import dj_database_url
-# DATABASES = {
-#      'default': dj_database_url.parse("postgres://obesoft_1kui_user:KB6aocxzlx1clZEchOALNbXPD8oQlRIK@dpg-cj146bq7l0ft7nk3gji0-a.oregon-postgres.render.com/obesoft_1kui")
-# }
+ }'''
+import dj_database_url
+DATABASES = {
+     'default': dj_database_url.parse("postgres://obesoft_1kui_user:KB6aocxzlx1clZEchOALNbXPD8oQlRIK@dpg-cj146bq7l0ft7nk3gji0-a.oregon-postgres.render.com/obesoft_1kui")
+}
 
 
 # Password validation
