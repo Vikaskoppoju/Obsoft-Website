@@ -105,6 +105,7 @@
     #co_prof td {
       font-size: 12px;
     }
+
   }
   @media print {
   
@@ -148,7 +149,6 @@
       document.body.removeChild(fileDownload);
    }
    </script>
-   
 </head>
 <body>
    <header style="text-align: center;">
@@ -262,15 +262,15 @@
         <tr>
       <td>{{i.index | safe}}</td>
       <td>{{i.roll_no | safe}}</td>
-     <td>{{i.co1_a | safe}}</td>
-     <td>{{i.co1_b | safe}}</td>
-     <td>{{i.co1_c | safe}}</td>
-     <td>{{i.co2_a | safe}}</td>
-     <td>{{i.co2_b | safe}}</td>
-     <td>{{i.co2_c | safe}}</td>
      <td>{{i.co3_a | safe}}</td>
      <td>{{i.co3_b | safe}}</td>
      <td>{{i.co3_c | safe}}</td>
+     <td>{{i.co4_a | safe}}</td>
+     <td>{{i.co4_b | safe}}</td>
+     <td>{{i.co4_c | safe}}</td>
+     <td>{{i.co5_a | safe}}</td>
+     <td>{{i.co5_b | safe}}</td>
+     <td>{{i.co5_c | safe}}</td>
      <td>{{i.total | safe}}</td>
         </tr>
         {% endfor %}
@@ -327,15 +327,15 @@
         attained profeciency level</th>
         {% if atn %} 
         {% for i in atn%}
-      <th>{{i.co1a_atn | safe}}</th>
-      <th>{{i.co1b_atn | safe}}</th>
-      <th>{{i.co1c_atn | safe}}</th>
-      <th>{{i.co2a_atn | safe}}</th>
-      <th>{{i.co2b_atn | safe}}</th>
-      <th>{{i.co2c_atn | safe}}</th>
       <th>{{i.co3a_atn | safe}}</th>
       <th>{{i.co3b_atn | safe}}</th>
       <th>{{i.co3c_atn | safe}}</th>
+      <th>{{i.co4a_atn | safe}}</th>
+      <th>{{i.co4b_atn | safe}}</th>
+      <th>{{i.co4c_atn | safe}}</th>
+      <th>{{i.co5a_atn | safe}}</th>
+      <th>{{i.co5b_atn | safe}}</th>
+      <th>{{i.co5c_atn | safe}}</th>
       {% endfor %}
       {% endif %}
   </tr>
@@ -343,15 +343,15 @@
     <th>No of Students attempted </th>
       {% if atn %} 
       {% for i in atn%}
-    <th>{{i.co1a_atmp | safe}}</th>
-    <th>{{i.co1b_atmp | safe}}</th>
-    <th>{{i.co1c_atmp | safe}}</th>
-    <th>{{i.co2a_atmp | safe}}</th>
-    <th>{{i.co2b_atmp | safe}}</th>
-    <th>{{i.co2c_atmp | safe}}</th>
     <th>{{i.co3a_atmp | safe}}</th>
     <th>{{i.co3b_atmp | safe}}</th>
     <th>{{i.co3c_atmp | safe}}</th>
+    <th>{{i.co4a_atmp | safe}}</th>
+    <th>{{i.co4b_atmp | safe}}</th>
+    <th>{{i.co4c_atmp | safe}}</th>
+    <th>{{i.co5a_atmp | safe}}</th>
+    <th>{{i.co5b_atmp | safe}}</th>
+    <th>{{i.co5c_atmp | safe}}</th>
     {% endfor %}
     {% endif %}
 </tr>
@@ -359,15 +359,15 @@
   <th>Percentage of Attainment </th>
     {% if atn %} 
     {% for i in atn%}
-  <th>{{i.co1a_per | safe}}</th>
-  <th>{{i.co1b_per | safe}}</th>
-  <th>{{i.co1c_per | safe}}</th>
-  <th>{{i.co2a_per | safe}}</th>
-  <th>{{i.co2b_per | safe}}</th>
-  <th>{{i.co2c_per | safe}}</th>
   <th>{{i.co3a_per | safe}}</th>
   <th>{{i.co3b_per | safe}}</th>
   <th>{{i.co3c_per | safe}}</th>
+  <th>{{i.co4a_per | safe}}</th>
+  <th>{{i.co4b_per | safe}}</th>
+  <th>{{i.co4c_per | safe}}</th>
+  <th>{{i.co5a_per | safe}}</th>
+  <th>{{i.co5b_per | safe}}</th>
+  <th>{{i.co5c_per | safe}}</th>
   {% endfor %}
   {% endif %}
 </tr>
@@ -383,9 +383,9 @@
       <th>Average Attainment Percentage</th>
     {% if atn %} 
     {% for i in atn%}
-  <th>{{i.co1_atnper | safe}}</th>
-  <th>{{i.co2_atnper | safe}}</th>
   <th>{{i.co3_atnper | safe}}</th>
+  <th>{{i.co4_atnper | safe}}</th>
+  <th>{{i.co5_atnper | safe}}</th>
   {% endfor %}
   {% endif %}
 </tr>
@@ -393,9 +393,9 @@
   <th>Attained Level</th>
 {% if atn %} 
 {% for i in atn%}
-<th>{{i.co1_atnlvl | safe}}</th>
-<th>{{i.co2_atnlvl | safe}}</th>
 <th>{{i.co3_atnlvl | safe}}</th>
+<th>{{i.co4_atnlvl | safe}}</th>
+<th>{{i.co5_atnlvl | safe}}</th>
 {% endfor %}
 {% endif %}
 </tr>

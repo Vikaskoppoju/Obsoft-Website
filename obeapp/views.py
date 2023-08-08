@@ -17,6 +17,7 @@ import pandas as pd
 import numpy as np
 from .models import *
 from .forms import *
+import json
 
 #<=======================================Admin(HOD's) and Faculty Logins =================================>
 def NotFound(request):
@@ -702,6 +703,7 @@ def mid2_marks_insert(filename,reg,branch,sem,acyear,coursecode):
                                 co3_a_max=m[2], co3_b_max=m[3], co3_c_max=m[4], co4_a_max=m[5], co4_b_max=m[6],
                                 co4_c_max=m[7], co5_a_max=m[8], co5_b_max=m[9], co5_c_max=m[10])
         f.save()
+    calculate_mid2_results(reg,branch,sem,acyear,coursecode)
 
 def sem_marks_insert(filename,reg,branch,sem,acyear,coursecode):
     book_schema = ModelSchema.objects.get(name=str(reg)+'sem_marks')
@@ -743,11 +745,11 @@ def sem_marks_insert(filename,reg,branch,sem,acyear,coursecode):
                                 co3_c=df['q9'][i], co4_a=df['q10'][i], co4_b=df['q11'][i], co4_c=df['q12'][i],
                                 co5_a=df['q13'][i], co5_b=df['q14'][i], co5_c=df['q15'][i]
                                 , branch=branch, course_code=course_code, academic_year=academic_year, sem=sem,
-                                co1_a_max=maxmarks[2], co1_b_max=maxmarks[3], co1_c_max=maxmarks[4],
-                                co2_a_max=maxmarks[5], co2_b_max=maxmarks[6], co2_c_max=maxmarks[7],
-                                co3_a_max=maxmarks[8], co3_b_max=maxmarks[9], co3_c_max=maxmarks[10]
-                                , co4_a_max=maxmarks[11], co4_b_max=maxmarks[12], co4_c_max=maxmarks[13],
-                                co5_a_max=maxmarks[14], co5_b_max=maxmarks[15], co5_c_max=maxmarks[16])
+                                co1_a_max=maxmarks[1], co1_b_max=maxmarks[2], co1_c_max=maxmarks[3],
+                                co2_a_max=maxmarks[4], co2_b_max=maxmarks[5], co2_c_max=maxmarks[6],
+                                co3_a_max=maxmarks[7], co3_b_max=maxmarks[8], co3_c_max=maxmarks[9]
+                                , co4_a_max=maxmarks[10], co4_b_max=maxmarks[11], co4_c_max=maxmarks[12],
+                                co5_a_max=maxmarks[13], co5_b_max=maxmarks[14], co5_c_max=maxmarks[15])
         f.save()
     calculate_sem_results(reg, branch,sem,acyear, coursecode)
 
@@ -927,7 +929,7 @@ def storeinput(request):
         sem = request.POST["sem"]
         exam = request.POST["exam_type"]
         if exam=="mid1":
-            print("hereeeee")
+            # print("hereeeee")
             mid1_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
         elif exam=="mid2":
             mid2_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
@@ -937,9 +939,100 @@ def storeinput(request):
         return redirect(uploadcourseattainments)
     return render(request, 'obeapp/faculty/course_attenment.html')
 def viewattainments(request):
+    if request.method == 'POST':
+        acyear = request.POST["acyear"]
+        coursecode = request.POST["coursecode"]
+        regulation = request.POST['reg']
+        branch = request.POST["branch"]
+        sem = request.POST["sem"]
+        exam = request.POST["exam_type"]
+        branchname = {"cse":"Computer Science and Engineering","eee":"Electrical and Electronic Engineering"}
+        if exam=="mid1":
+            df = get_mid_attainments(reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode,type=exam)
+            l = ['CO1','CO2','CO3']
+            book_schema = ModelSchema.objects.get(name=str(regulation) + 'mid1')
+            book = book_schema.as_model()
+            Book = book.objects.filter(coursecode=coursecode,branch=branch,sem=sem,acyear=acyear)
+            dfa = pd.DataFrame(Book.values_list(),columns=Book.values()[0])
+            dfa=dfa.replace(-1,"")
+            json_records = dfa.reset_index().to_json(orient ='records')
+            atn = []
+            atn = json.loads(json_records)
+            max = [df['co' + i +'_max'][0] for i in ['1_a','1_b','1_c','2_a','2_b','2_c','3_a','3_b','3_c']]
+            coursen = lessonplanBatch.objects.get(semester=sem,academicyear=acyear,course_code=coursecode)
+            cname=coursen.name_of_the_course
+            index = [i for i in range(1,len(df)+1)]
+            df['index'] = index
+            json_records = df.reset_index().to_json(orient ='records')
+            arr = []
+            arr = json.loads(json_records)
+            return render(request,"obeapp/mid1_attainments.html",{'cos':l,'df':df,'reg':regulation,'sem':sem,'branch':branch.upper(),'branchname':branchname[branch],'acyear':acyear,'coursecode':coursecode.upper(),'type':exam.upper(),'max':max,'d':arr,'atn':atn,'cname':cname})
+        elif exam=="mid2":
+            l = ['CO3','CO4','CO5']
+            df = get_mid_attainments(reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode,type=exam)
+            book_schema = ModelSchema.objects.get(name=str(regulation) + 'mid2')
+            book = book_schema.as_model()
+            Book = book.objects.filter(coursecode=coursecode,branch=branch,sem=sem,acyear=acyear)
+            dfa = pd.DataFrame(Book.values_list(),columns=Book.values()[0])
+            dfa=dfa.replace(-1,"")
+            json_records = dfa.reset_index().to_json(orient ='records')
+            atn = []
+            atn = json.loads(json_records)
+            max = [df['co' + i +'_max'][0] for i in ['3_a','3_b','3_c','4_a','4_b','4_c','5_a','5_b','5_c']]
+            coursen = lessonplanBatch.objects.get(semester=sem,academicyear=acyear,course_code=coursecode)
+            cname=coursen.name_of_the_course
+            index = [i for i in range(1,len(df)+1)]
+            df['index'] = index
+            json_records = df.reset_index().to_json(orient ='records')
+            arr = []
+            arr = json.loads(json_records)
+            return render(request,"obeapp/mid2_attainment.html",{'cos':l,'df':df,'reg':regulation,'sem':sem,'branch':branch.upper(),'branchname':branchname[branch],'acyear':acyear,'coursecode':coursecode.upper(),'type':exam.upper(),'max':max,'d':arr,'atn':atn,'cname':cname})
+        elif exam=="sem":
+            l = ['CO1','CO2','CO3','CO4','CO5']
+            df = get_sem_attainments(reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode,type=exam)
+            book_schema = ModelSchema.objects.get(name=str(regulation) + 'sem')
+            book = book_schema.as_model()
+            Book = book.objects.filter(coursecode=coursecode,branch=branch,sem=sem,academicyear=acyear)
+            dfa = pd.DataFrame(Book.values_list(),columns=Book.values()[0])
+            dfa=dfa.replace(-1,"")
+            json_records = dfa.reset_index().to_json(orient ='records')
+            atn = []
+            atn = json.loads(json_records)
+            max = [df['co' + i +'_max'][0] for i in ['1_a','1_b','1_c','2_a','2_b','2_c','3_a','3_b','3_c','4_a','4_b','4_c','5_a','5_b','5_c']]
+            coursen = lessonplanBatch.objects.get(semester=sem,academicyear=acyear,course_code=coursecode)
+            cname=coursen.name_of_the_course
+            index = [i for i in range(1,len(df)+1)]
+            df['index'] = index
+            json_records = df.reset_index().to_json(orient ='records')
+            arr = []
+            arr = json.loads(json_records)
+            return render(request,"obeapp/sem_attainments.html",{'cos':l,'df':df,'reg':regulation,'sem':sem,'branch':branch.upper(),'branchname':branchname[branch],'acyear':acyear,'coursecode':coursecode.upper(),'type':exam.upper(),'max':max,'d':arr,'atn':atn,'cname':cname})
+    # else:
+    #     return redirect(viewattainments)
     return render(request,"obeapp/faculty/view_attainments.html")
+def get_mid_attainments(reg,branch,sem,acyear,coursecode,type):
+    if type=="mid1":
+        book_schema = ModelSchema.objects.get(name=str(reg) + 'mid1_marks')
+    else:
+        book_schema = ModelSchema.objects.get(name=str(reg) + 'mid2_marks')
+    book = book_schema.as_model()
+    Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
+    # Book = book.objects.all()
+    df = pd.DataFrame(Book.values_list(),columns=Book.values()[0])
+    df=df.replace(-2,'A')
+    df=df.replace(-1,"")
+    # print(df)
+    return df
+def get_sem_attainments(reg,branch,sem,acyear,coursecode,type):
+    book_schema = ModelSchema.objects.get(name=str(reg) + 'sem_marks')
+    book = book_schema.as_model()
+    Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
+    df = pd.DataFrame(Book.values_list(),columns=Book.values()[0])
+    df=df.replace(-2,'A')
+    df=df.replace(-1,"")
+    return df
 
-
+# get_mid_attainments('v20','cse','III','2022-23','v20cst00',"mid1")
 # mid1_marks_table('v20')
 # mid2_marks_table('v20')
 # mid1_results_table('v20')
