@@ -147,7 +147,7 @@ def course_attenment(request):
 #<=======================================Admin Activities =================================>
 
 def Regulations(request):
-    print("regulation")
+    # print("regulation")
     reg1 = Regulation.objects.all()
     num=[i for i in range(1,len(reg1)+1)]
     reg=zip(reg1,num)
@@ -158,7 +158,7 @@ def add_regulation(request):
     if request.method == "POST":
         regulation = request.POST['regulation']
         batch = request.POST['batch']
-        print(regulation)
+        # print(regulation)
         if(len(Regulation.objects.filter(Regulation=regulation)) == 0):  
             Reg = Regulation()
             Reg.Sno = len(reg)+1
@@ -173,7 +173,11 @@ def add_regulation(request):
                 mid1_results_table(regulation)
                 mid2_results_table(regulation)
                 sem_results_table(regulation)
-            except:
+            except Exception as e:
+                print(e)
+                reg1 = Regulation.objects.all()
+                num=[i for i in range(1,len(reg1)+1)]
+                reg=zip(reg1,num)
                 return render(request, 'obeapp/admin/Regulations.html',{'reg':reg})
         else:
             messages.error(request,'Regulation already exists')
@@ -411,6 +415,7 @@ def mid1_results_table(reg):
             c1 += 1
 
     Book = book_schema.as_model()
+    print("mid1r created")
 
 
 def mid2_results_table(reg):
@@ -450,6 +455,7 @@ def mid2_results_table(reg):
             )
             c1 += 1
     Book = book_schema.as_model()
+    print("mid2r created")
 
 def sem_results_table(reg):
     l1 = ['branch', 'coursecode', 'academicyear', 'sem']
@@ -488,6 +494,7 @@ def sem_results_table(reg):
             )
             c1 += 1
     Book = book_schema.as_model()
+    print("semr created")
 
 def mid1_marks_table(reg):
     book_schema = ModelSchema.objects.create(name=str(reg) + 'mid1_marks')
@@ -539,7 +546,7 @@ def mid1_marks_table(reg):
             model_schema=book_schema,
             max_length=255,
         )
-
+    print("mid1 created")
     Book = book_schema.as_model()
 
 
@@ -593,7 +600,7 @@ def mid2_marks_table(reg):
             model_schema=book_schema,
             max_length=255,
         )
-
+    print("mid2 created")
     Book = book_schema.as_model()
 
 def sem_marks_table(reg):
@@ -644,7 +651,7 @@ def sem_marks_table(reg):
             model_schema=book_schema,
             max_length=255,
         )
-
+    print("sem created")
     Book = book_schema.as_model()
 
 def mid1_marks_insert(filename,reg,branch,sem,acyear,coursecode):

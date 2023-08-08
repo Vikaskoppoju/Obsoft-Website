@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'obesoft.wsgi.application'
  }'''
 import dj_database_url
 DATABASES = {
-     'default': dj_database_url.parse("postgres://obesoftfinal_user:vxfJpJAFrAWotNiUMxO0O52EXkIoFhLy@dpg-cj965fivvtos73bupoug-a.oregon-postgres.render.com/obesoftfinal")
+     'default': dj_database_url.parse("postgres://obesoftfinal_q3j3_user:aVr7dThqCMjZvQNp0q3XDwBZlLtWQDob@dpg-cj96hbpduelc73er1i40-a.oregon-postgres.render.com/obesoftfinal_q3j3")
 }
 
 
