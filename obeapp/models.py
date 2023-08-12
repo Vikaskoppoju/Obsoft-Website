@@ -36,6 +36,8 @@ class CustomUser(AbstractUser, PermissionsMixin):
     Permissions = models.CharField(max_length=1000)
     Biometricid = models.CharField(max_length=100)
     branch = models.CharField(max_length=100, default="None")
+    dept_id=models.CharField(max_length=100, default=0)
+    hod=models.BooleanField(default=False)
     #email = models.EmailField(unique=True)
 
     # Remove 'username' and 'email' fields, as they are already provided by AbstractUser

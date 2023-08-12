@@ -51,22 +51,22 @@
           <div class="card-body p-3 pt-2">
             <form  method="POST" >
               {% csrf_token %}
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department</label>
-                  <input type="text" class="form-control" name="dept" value="{{ dept.department_name }}" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department ID</label>
-                  <input type="text" class="form-control" name="deptid" value="{{ dept.department_id }}" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department HOD</label>
-                  <input type="text" class="form-control" name="hod" value="{{ dept.department_hod_name }}" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">HOD ID</label>
-                  <input type="text" class="form-control" name="hodid" value="{{ dept.department_hod_id }}" required>
-                </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Department</label>
+                <input type="text" class="form-control" name="dept" value="{{ dept.branch }}" required>
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Department ID</label>
+                <input type="text" class="form-control" name="deptid" value="{{ dept.dept_id }}" required>
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">Department HOD</label>
+                <input type="text" class="form-control" name="hod" value="{{ dept.username }}" required>
+              </div>
+              <div class="input-group input-group-outline mb-3">
+                <label class="form-label">HOD ID</label>
+                <input type="text" class="form-control" name="hodid" value="{{ dept.Biometricid }}" required>
+              </div>
                 <!-- <div class="form-check form-check-info text-start ps-0">
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
                   <label class="form-check-label" for="flexCheckDefault">

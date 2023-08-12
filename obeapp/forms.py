@@ -39,7 +39,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username','Designation', 'Biometricid','branch', 'password']
+        fields = ['username','Designation', 'Biometricid','branch','hod','dept_id', 'password']
 
     def clean(self):
         cleaned_data = super().clean()

@@ -18,7 +18,42 @@ import numpy as np
 from .models import *
 from .forms import *
 import json
+def hod_login(request):
+    if request.user.is_authenticated:
+        # print("$$$$$$$$$$$$$$")
+        # userid = request.POST['unamef']
+        return render(request, 'obeapp/department/department_admin.html')
+    if request.method == "POST":
+        userid = request.POST['uname']
+        pswd = request.POST['pswd']
+        
+        
+        
+        if CustomUser.objects.filter(Biometricid=userid).exists():
+                   obj=CustomUser.objects.get(Biometricid=userid)
+                   if(obj.password==pswd):
+                        if(obj.hod):
+                            user = authenticate(request,Biometricid=userid, password=pswd,backend='obeapp.backends.EmailBackend')
+                            login(request, obj)
+                            print("******")
+                            request.session['user_id'] = userid
+                            return render(request, 'obeapp/department/department_admin.html')
+                        else:
+                            return render(request, 'obeapp/land.html')
+                   else:
+                        print("error")
+                        messages.error(request,'invalid passwod please try again')
+                        return render(request, 'obeapp/department/hod_login.html')
 
+        else:
+            print("in else of faculty login***")
+            return render(request, 'obeapp/department/hod_login.html')
+    else:
+     return render(request, 'obeapp/department/hod_login.html')
+def hod_logout(request):
+    logout(request)
+    request.user=None
+    return redirect(hod_login)
 #<=======================================Admin(HOD's) and Faculty Logins =================================>
 def NotFound(request):
     return render("obapp/notfound.html")
@@ -53,6 +88,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
+    request.user=None
     return redirect(user_login)  # Replace 'login' with the name of your login page URL pattern
 
 @login_required(login_url='/admin_login')
@@ -94,6 +130,8 @@ def admin_login(request):
 
 def admin_logout(request):
     logout(request)
+    request.user=None
+    request.session['user_name'] = None
     return redirect(user_login)
 
 def department_admin_login(request):
@@ -128,8 +166,13 @@ def faculty_dashboard(request):
             return render(request, 'obeapp/land.html')
     except:
         return render(request, 'obeapp/land.html')
+
+@login_required(login_url='/hod_login')
 def department_dashboard(request):
     return render(request, 'obeapp/department/department_admin.html')
+@login_required(login_url='/admin_login')
+@login_required(login_url='/user_login')
+@login_required(login_url='/hod_login')
 def course_view(request):
      return render(request,'obeapp/admin/course_view.html')
 def dept_course_view(request):
@@ -145,14 +188,14 @@ def course_attenment(request):
 
 
 #<=======================================Admin Activities =================================>
-
+@login_required(login_url='/admin_login')
 def Regulations(request):
     # print("regulation")
     reg1 = Regulation.objects.all()
     num=[i for i in range(1,len(reg1)+1)]
     reg=zip(reg1,num)
     return render(request, 'obeapp/admin/Regulations.html',{'reg':reg})
-
+@login_required(login_url='/admin_login')
 def add_regulation(request):
     reg = Regulation.objects.all()
     if request.method == "POST":
@@ -182,14 +225,14 @@ def add_regulation(request):
         else:
             messages.error(request,'Regulation already exists')
     return redirect(Regulations)
-
+@login_required(login_url='/admin_login')
 def Course(request):
     courses1 = Courses.objects.filter(branch="cse")
     num=[i for i in range(1,len(courses1)+1)]
     courses=zip(courses1,num)
     return render(request, 'obeapp/admin/Courses.html',{'courses':courses})
 
-
+@login_required(login_url='/admin_login')
 def add_course(request):
     if request.method == "POST":
         course = request.POST['course']
@@ -219,7 +262,7 @@ def add_course(request):
     #     form = RegistrationForm()
 
     # return render(request, 'obeapp/ManageFaculty.html', {'form': form})
-
+@login_required(login_url='/admin_login')
 def edit_course(request, course_id):
     course = get_object_or_404(Courses, pk=course_id)
     
@@ -243,7 +286,7 @@ def edit_course(request, course_id):
         return redirect(Course)  # Assuming you've named the URL for the course list page as 'course-list'
 
     return render(request, 'obeapp/admin/edit_course.html', {'course': course})
-
+@login_required(login_url='/admin_login')
 def delete_course(request, course_id):
     # Get the course object to be deleted
     course = get_object_or_404(Courses, pk=course_id)
@@ -316,14 +359,21 @@ def delete_faculty(request, id):
     cour = get_object_or_404(CustomUser, pk=id)
     cour.delete()
     return redirect(ManageFaculty)
-
+@login_required(login_url='/admin_login')
 def Department(request):
-    dept1 = Departments.objects.all()
+    # dept1 = Departments.objects.all()
+    # print(dept1)
+    # num=[i for i in range(1,len(dept1)+1)]
+    # dept=zip(dept1,num)
+    # return render(request, 'obeapp/admin/dept_hod.html',{'dept':dept})
+    dept1=CustomUser.objects.filter(hod=True)
     print(dept1)
+    obj2=dept1[0]
+    print(obj2.UName)
     num=[i for i in range(1,len(dept1)+1)]
     dept=zip(dept1,num)
     return render(request, 'obeapp/admin/dept_hod.html',{'dept':dept})
-
+@login_required(login_url='/admin_login')
 def add_department(request):
     if request.method == "POST":
         dept = request.POST['dept']
@@ -337,23 +387,32 @@ def add_department(request):
         cour.department_hod_id = hodid
         cour.save()
     return redirect(Department)
-def edit_department(request, department_id):
-    cour = get_object_or_404(Departments, pk=department_id)
+@login_required(login_url='/admin_login')
+def delete_hod(request,id):
+    cour=CustomUser.objects.get(id=id)
+    cour.delete()
+    return redirect(Department) 
+@login_required(login_url='/admin_login')
+def edit_department(request, id):
+    #cour = get_object_or_404(Departments, pk=id)
+    cour=CustomUser.objects.get(id=id)
     if request.method == "POST":
         # Retrieve the edited course information
+        
         dept = request.POST['dept']
         deptid = request.POST['deptid']
         hod = request.POST['hod']
         hodid = request.POST['hodid']
+
         # Update the course fields
-        cour.department_name = dept
-        cour.department_id = deptid
-        cour.department_hod_name = hod
-        cour.department_hod_id = hodid
+        cour.branch = dept
+        cour.dept_id = deptid
+        cour.username = hod
+        cour.Biometricid = hodid
         cour.save()
         # Redirect back to the Course list page
         return redirect(Department)  # Assuming you've named the URL for the course list page as 'course-list'
-
+    #return render(request, 'obeapp/admin/edit_dept.html')
     return render(request, 'obeapp/admin/edit_dept.html', {'dept': cour})
 #<=======================================Faculty Activities =================================>
 

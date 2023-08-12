@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ObSoft Administration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'rfiles/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'rfiles/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'rfiles/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'rfiles/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'rfiles/css/owl.theme.default.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/css/jquery.fancybox.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/css/bootstrap-datepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/fonts/flaticon/font/flaticon.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'rfiles/css/style.css' %}">
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo mr-auto w-25"><a href="index.html"></a></div>
+
+          <div class="mx-auto text-center">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+                <li><a href="#" class="nav-link">ObSoft Planoryx</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="ml-auto w-25">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+                <li class="cta"><a href="contact.html" class="nav-link"><span>Contact Us</span></a></li>
+              </ul>
+            </nav>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span
+                class="icon-menu h3"></span></a>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+    <div class="intro-section" id="home-section">
+      <style type="text/css">
+        .backg{
+          background-image: url('{% static "rfiles/images/hero_1.jpg" %}');
+        }
+      </style>
+
+      <div class="slide-1 backg"  data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                  <h1 data-aos="fade-up" data-aos-delay="100">ObSoft Planoryx</h1>
+                  <h2 class="mb-4" data-aos="fade-up" data-aos-delay="200">Admin Login</h2>
+
+
+                </div>
+
+                <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                  <div class="form-container">
+                    <form  method="POST" class="form-box">
+                      {% csrf_token %}
+                      <h3 class="h4 text-black mb-4">HOD Login</h3>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="ID" placeholder="Admin ID" name="uname"
+                          required />
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="pswd"
+                          required />
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill" value="LOGIN">
+                      </div>
+                  </div>
+
+
+
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- .site-wrap -->
+
+  <script src="{% static 'rfiles/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'rfiles/js/popper.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'rfiles/js/aos.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'rfiles/js/jquery.sticky.js' %}"></script>
+
+  
+  <script src="{% static 'rfiles/js/main.js' %}"></script>
+
+</body>
+
+</html>

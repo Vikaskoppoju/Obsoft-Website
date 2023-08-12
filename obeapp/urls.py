@@ -22,7 +22,9 @@ urlpatterns = [
     path('delete_faculty/<int:id>/', views.delete_faculty, name='delete_faculty'),
     path('Department',views.Department,name='Department'),
     path('add_department',views.add_department,name='add_department'),
-    path('edit_department/<str:department_id>/', views.edit_department, name='edit_department'),
+    #path('edit_department/<str:department_id>/', views.edit_department, name='edit_department'),
+     path('edit_department/<int:id>/', views.edit_department, name='edit_department'),
+    path('delete_hod/<int:id>/',views.delete_hod,name='delete_hod'),
     #<=========================================Faculty urls=======================================>
     
     # path('test1',views.test1,name='test1'),
@@ -38,7 +40,8 @@ urlpatterns = [
     #<=========================================College Admin urls=======================================>
 
     path('department_dashboard',views.department_dashboard,name='department_dashboard'),
-
+    path('hod_login',views.hod_login,name='hod_login'),
+    path('hod_logout',views.hod_logout,name='hod_logout'),
 
 
 

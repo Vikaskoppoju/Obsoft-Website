@@ -1155,14 +1155,31 @@ function rmrb(){
     }
     else{
         var rm=document.getElementById(rb[count_referencebook-1]);
-        var cptb=document.getElementById("copyrb");
-        console.log("in remove**********************")
-        console.log(cptb);
-        
         rm.remove();
         count_referencebook=count_referencebook-1;
+
+        var cptb=document.getElementById("copyrb");
+        
+        
+        
         cptb.setAttribute("value",count_referencebook);
-        cptb.setAttribute("placeholder",count_referencebook);
+     cptb.setAttribute("placeholder",count_referencebook);
+        // var rm=document.getElementById(rb[count_referencebook-1]);
+        // var cptb=document.getElementById("copyrb");
+        // console.log("in remove**********************")
+        // console.log(cptb);
+        
+        // rm.remove();
+        // count_referencebook=count_referencebook-1;
+        // cptb.setAttribute("value",count_referencebook);
+        // cptb.setAttribute("placeholder",count_referencebook);
+    //     var rm=document.getElementById(rb[count_referencebook-1]);
+    //  rm.remove();
+     
+    //  count_referencebook=count_referencebook-1;
+    //  var cptb=document.getElementById("copyrb");
+    //  cptb.setAttribute("value",count_referencebook);
+    //  cptb.setAttribute("placeholder",count_referencebook);
     }
 }
 

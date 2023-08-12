@@ -27,14 +27,14 @@
             </thead>
             {% for i,j in dept %}
             <tr>
-                <td>{{j}}</td>
-                <td>{{i.department_name}}</td>
-                <td>{{i.department_id}}</td>
-                <td>{{i.department_hod_name}}</td>
-                <td>{{i.department_hod_id}}</td>
+              <td>{{j}}</td>
+              <td>{{i.branch}}</td>
+              <td>{{i.dept_id}}</td>
+              <td>{{i.username}}</td>
+              <td>{{i.Biometricid}}</td>
                 <td>
-                    <a href="{% url 'edit_department' i.department_id %}" class="btn btn-primary btn-sm">Edit</a>
-                    <!-- <a href="{% url 'delete_course' i.pk %}" class="btn btn-primary btn-sm">Delete</a> -->
+                  <a href="{% url 'edit_department' i.id %}" class="btn btn-primary btn-sm">Edit</a>
+                  <a href="{% url 'delete_hod' i.id %}" class="btn btn-primary btn-sm">Delete</a>
                 </td>
             </tr>
             {% endfor %}
@@ -42,44 +42,6 @@
         </table>
     </div>
 </div>
-<div class="container-fluid my-4">
-    <div class="bg-gradient-secondary shadow-primary border-radius-lg py-2 pe-1">
-        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Add Courses</h4>
-      </div>
-    
-        <div class="card">
-          <div class="card-body p-3 pt-2">
-            <form method="POST" action="add_department">
-              {% csrf_token %}
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department</label>
-                  <input type="text" class="form-control" name="dept" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department ID</label>
-                  <input type="text" class="form-control" name="deptid" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Department HOD</label>
-                  <input type="text" class="form-control" name="hod" required>
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">HOD ID</label>
-                  <input type="text" class="form-control" name="hodid" required>
-                </div>
-                <div class="form-check form-check-info text-start ps-0">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked required>
-                  <label class="form-check-label" for="flexCheckDefault">
-                    I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Add Department</a>
-                  </label>
-                </div>
-                <div class="text-center">
-                  <input type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" value="Add Department">
-                </div>
-              </form>
-              </div>
-          
-    </div>
-</div>
+
 
 {% endblock %}
