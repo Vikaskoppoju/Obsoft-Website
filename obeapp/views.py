@@ -98,7 +98,7 @@ def user_registration(request):
         if form.is_valid():
             form.save()
             print("user form saveddddddddddddddddddddddd")
-            return redirect(user_login)  # Redirect to login page after successful registration
+            return redirect(admin_dashboard)  # Redirect to login page after successful registration
 
     else:
         form = RegistrationForm()
