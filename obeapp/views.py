@@ -18,6 +18,7 @@ import numpy as np
 from .models import *
 from .forms import *
 import json
+#<================================hod ======================================>
 def hod_login(request):
     if request.user.is_authenticated:
         # print("$$$$$$$$$$$$$$")
@@ -54,6 +55,30 @@ def hod_logout(request):
     logout(request)
     request.user=None
     return redirect(hod_login)
+@login_required(login_url='/hod_login')
+@login_required(login_url='/user_login')
+def change_password(request):
+    if(request.method=='POST'):
+        print(request.user.id,"***********************************")
+        cuser=CustomUser.objects.get(id=request.user.id)
+        pswd=request.POST['pswd']
+        cpswd=request.POST['cpswd']
+        if(pswd==cpswd):
+            cuser.password=pswd
+            cuser.save();
+            if(cuser.hod):
+                return redirect(department_dashboard)
+            else:
+                return redirect(user_login)
+        else:
+            messages.error(request,'password doesn\'t match each other please enter a valid one')
+    pid=request.user.id
+    cuser=CustomUser.objects.get(id=pid)
+    if(cuser.hod):
+        return render(request,'obeapp/department/change_password.html')
+    else:
+        return render(request,'obeapp/faculty/change_password.html')
+
 #<=======================================Admin(HOD's) and Faculty Logins =================================>
 def NotFound(request):
     return render("obapp/notfound.html")

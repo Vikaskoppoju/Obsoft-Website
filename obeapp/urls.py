@@ -42,6 +42,7 @@ urlpatterns = [
     path('department_dashboard',views.department_dashboard,name='department_dashboard'),
     path('hod_login',views.hod_login,name='hod_login'),
     path('hod_logout',views.hod_logout,name='hod_logout'),
+    path('change_password',views.change_password,name="change_password"),
 
 
 
