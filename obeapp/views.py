@@ -121,10 +121,24 @@ def user_registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            print("user form saveddddddddddddddddddddddd")
-            return redirect(admin_dashboard)  # Redirect to login page after successful registration
-
+            instance = form.save(commit=False)
+            instance.password = 'obsoft1234'
+            obj=CustomUser.objects.filter(Biometricid=instance.Biometricid).first()
+            if obj is not None:
+                print('in 1st if*************************')
+                messages.error(request,'user with that Biometric id already exists')
+                return render(request, 'obeapp/faculty/faculty_registration.html', {'form': form})
+            if instance.hod:
+                instance.branch=instance.branch.upper()
+                obj=CustomUser.objects.filter(hod=True,branch=instance.branch).first()
+                if obj is None:
+                    instance.save()
+                    return redirect(admin_dashboard) 
+                else:
+                    messages.error(request,'HOD for the department '+instance.branch+'already exists')
+                    return render(request, 'obeapp/faculty/faculty_registration.html', {'form': form})
+            instance.save()
+            return redirect(admin_dashboard)
     else:
         form = RegistrationForm()
 

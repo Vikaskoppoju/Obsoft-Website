@@ -33,13 +33,14 @@ from .models import *
 
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    # password = forms.CharField(widget=forms.PasswordInput)
+    # confirm_password = forms.CharField(widget=forms.PasswordInput)
     # active = forms.BooleanField(initial=True, required=False)  # Add "active" field
 
     class Meta:
         model = CustomUser
-        fields = ['username','Designation', 'Biometricid','branch','hod','dept_id', 'password']
+        #fields = ['username','Designation', 'Biometricid','branch','hod','dept_id', 'password']
+        fields = ['username','Designation', 'Biometricid','branch','hod','dept_id']
 
     def clean(self):
         cleaned_data = super().clean()

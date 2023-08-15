@@ -80,6 +80,10 @@
         *{
           color:black;
         }
+        .ermsg{
+    font-size: 15px;
+    color: red;
+  }
       </style>
 
       <div class="slide-1 backg"  data-stellar-background-ratio="0.5">
@@ -98,6 +102,11 @@
                   <div class="form-container">
                     <form  method="POST" class="form-box">
                       {% csrf_token %}
+                      <div>
+                        {% for message in messages %}
+                        <h2 class="ermsg">*{{message}}</h2>
+                        {% endfor %}
+                      </div>
                       <h3 class="h4 text-black mb-4">Admin Login</h3>
                       <!-- <div class="form-group">
                         <input type="text" class="form-control" id="ID" placeholder="Admin ID" name="uname"
