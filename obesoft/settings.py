@@ -75,26 +75,26 @@ WSGI_APPLICATION = 'obesoft.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#      'default': {
+DATABASES = {
+     'default': {
         
-#         #  'ENGINE': 'django.db.backends.sqlite3',
-#         #  'NAME': BASE_DIR / 'db.sqlite3',
-#          'ENGINE': 'django.db.backends.mysql',
-#          'NAME': 'obsoft4',
-#          'USER':'root',
-#          'PASSWORD':'sushma562341kurella',
-#         #'PASSWORD':'jaga@6493',
-#          'HOST':'127.0.0.1',
-#          'port':'3306'
+        #  'ENGINE': 'django.db.backends.sqlite3',
+        #  'NAME': BASE_DIR / 'db.sqlite3',
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'obsoft4',
+         'USER':'root',
+         'PASSWORD':'sushma562341kurella',
+        #'PASSWORD':'jaga@6493',
+         'HOST':'127.0.0.1',
+         'port':'3306'
 
         
-#      }
-#  }
-import dj_database_url
-DATABASES = {
-     'default': dj_database_url.parse("postgres://obesoftfinal_q3j3_user:aVr7dThqCMjZvQNp0q3XDwBZlLtWQDob@dpg-cj96hbpduelc73er1i40-a.oregon-postgres.render.com/obesoftfinal_q3j3")
-}
+     }
+ }
+# import dj_database_url
+# DATABASES = {
+#      'default': dj_database_url.parse("postgres://obesoftfinal_q3j3_user:aVr7dThqCMjZvQNp0q3XDwBZlLtWQDob@dpg-cj96hbpduelc73er1i40-a.oregon-postgres.render.com/obesoftfinal_q3j3")
+# }
 
 
 # Password validation
@@ -149,3 +149,9 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'user_login'
 AUTH_USER_MODEL = 'obeapp.CustomUser'
+
+# MIDDLEWARE = [
+#     # ... (other middlewares)
+#     'myapp.middleware.PreventBackAfterLogoutMiddleware',
+#     # ...
+# ]

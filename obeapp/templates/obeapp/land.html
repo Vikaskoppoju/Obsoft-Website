@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <title>Obsoft Planoryx</title>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -45,7 +46,11 @@
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  
+    <script type = "text/javascript" >
+      function preventBack() { window.history.forward(); }
+      setTimeout("preventBack()", 0);
+      window.onunload = function () { null };
+      </script>
   <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target">

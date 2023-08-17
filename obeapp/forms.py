@@ -40,7 +40,7 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         #fields = ['username','Designation', 'Biometricid','branch','hod','dept_id', 'password']
-        fields = ['username','Designation', 'Biometricid','branch','hod','dept_id']
+        fields = ['User_Name','Designation', 'Biometricid','branch','hod','dept_id']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -54,6 +54,5 @@ class RegistrationForm(forms.ModelForm):
 
 class LoginForm(AuthenticationForm):
     # You can add custom fields if needed
-
     class Meta:
         model = CustomUser

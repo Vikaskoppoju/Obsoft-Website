@@ -32,7 +32,7 @@ class Courses(models.Model):
 class CustomUser(AbstractUser, PermissionsMixin):
     sno = models.CharField(max_length=100, default=0)
     Designation = models.CharField(max_length=100)
-    UName = models.CharField(max_length=200, default="None")
+    User_Name = models.CharField(max_length=200, default="None")
     Permissions = models.CharField(max_length=1000)
     Biometricid = models.CharField(max_length=100)
     branch = models.CharField(max_length=100, default="None")

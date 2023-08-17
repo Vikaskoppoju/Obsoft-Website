@@ -18,12 +18,13 @@ import numpy as np
 from .models import *
 from .forms import *
 import json
+from django.views.decorators.cache import cache_control
 #<================================hod ======================================>
 def hod_login(request):
-    if request.user.is_authenticated:
-        # print("$$$$$$$$$$$$$$")
-        # userid = request.POST['unamef']
-        return render(request, 'obeapp/department/department_admin.html')
+    # if request.user.is_authenticated:
+    #     # print("$$$$$$$$$$$$$$")
+    #     # userid = request.POST['unamef']
+    #     return render(request, 'obeapp/department/department_admin.html')
     if request.method == "POST":
         userid = request.POST['uname']
         pswd = request.POST['pswd']
@@ -54,6 +55,7 @@ def hod_login(request):
 def hod_logout(request):
     logout(request)
     request.user=None
+    # return render(request, 'obeapp/logout.html')
     return redirect(hod_login)
 @login_required(login_url='/hod_login')
 @login_required(login_url='/user_login')
@@ -78,19 +80,18 @@ def change_password(request):
         return render(request,'obeapp/department/change_password.html')
     else:
         return render(request,'obeapp/faculty/change_password.html')
-
 #<=======================================Admin(HOD's) and Faculty Logins =================================>
 def NotFound(request):
     return render("obapp/notfound.html")
 def user_login(request):
-    if request.user.is_authenticated:
-        # print("$$$$$$$$$$$$$$")
-        # userid = request.POST['unamef']
-        return render(request, 'obeapp/faculty/faculty_dashboard.html')
+    # if request.user.is_authenticated:
+    #     # print("$$$$$$$$$$$$$$")
+    #     # userid = request.POST['unamef']
+    #     return render(request, 'obeapp/faculty/faculty_dashboard.html')
     if request.method == "POST":
         userid = request.POST['unamef']
         pswd = request.POST['pswdf']
-        user = authenticate(request,Biometricid=userid, password=pswd,backend='obeapp.backends.EmailBackend')
+        user = authenticate(request,Biometricid=userid, password=pswd,is_superuser=False,hod=False,backend='obeapp.backends.EmailBackend')
         
         
         if CustomUser.objects.filter(Biometricid=userid).exists():
@@ -114,6 +115,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     request.user=None
+    # return render(request, 'obeapp/logout.html')
     return redirect(user_login)  # Replace 'login' with the name of your login page URL pattern
 
 @login_required(login_url='/admin_login')
@@ -122,6 +124,7 @@ def user_registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
+            instance.username=instance. Biometricid
             instance.password = 'obsoft1234'
             obj=CustomUser.objects.filter(Biometricid=instance.Biometricid).first()
             if obj is not None:
@@ -132,25 +135,21 @@ def user_registration(request):
                 instance.branch=instance.branch.upper()
                 obj=CustomUser.objects.filter(hod=True,branch=instance.branch).first()
                 if obj is None:
+                    instance.username=instance. Biometricid
                     instance.save()
                     return redirect(admin_dashboard) 
                 else:
                     messages.error(request,'HOD for the department '+instance.branch+'already exists')
                     return render(request, 'obeapp/faculty/faculty_registration.html', {'form': form})
+            
+            instance.username=instance. Biometricid
             instance.save()
             return redirect(admin_dashboard)
     else:
         form = RegistrationForm()
 
     return render(request, 'obeapp/faculty/faculty_registration.html', {'form': form})
-
-
-
-
-
 #<=======================================College Admin Logins =================================>
-
-
 def admin_login(request):
     if request.user.is_authenticated:
         return redirect(admin_dashboard)
@@ -166,11 +165,13 @@ def admin_login(request):
 
             return render(request, 'obeapp/admin_login.html', {'error': True})
     return render(request, 'obeapp/admin_login.html')
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_logout(request):
     logout(request)
     request.user=None
     request.session['user_name'] = None
+   
+    # return render(request, 'obeapp/logout.html')
     return redirect(user_login)
 
 def department_admin_login(request):
@@ -334,7 +335,21 @@ def delete_course(request, course_id):
 
 
 def ManageFaculty(request):
-    customuser1 = CustomUser.objects.filter(branch="cse")
+    cur_user=request.session.get('user_id', None)
+    
+    obj=CustomUser.objects.get(username=cur_user)
+    lst=obj.branch
+    lst1=lst.split(",")
+    print(lst1)
+    # customuser1 = CustomUser.objects.filter(branch="cse"|branch="CST")
+    customuser1=[]
+    for i in lst1:
+        customuser0 = CustomUser.objects.filter(branch=i)
+        # customuser0.append(customuser1)
+        for j in customuser0:
+            customuser1.append(j)
+    # cust2=CustomUser.objects.filter(branch="CST")
+    # print(customuser1.extend(cust2))
     courses = Courses.objects.all()
     num=[i for i in range(1,len(customuser1)+1)]
     customuser=zip(customuser1,num)
@@ -347,12 +362,12 @@ def add_faculty(request):
         email = request.POST['email']
         coursedealing = request.POST['coursedealing']
         branch  = request.POST['branch']
-        branch = "cse"
+        # branch = "cse"
         clen = CustomUser.objects.all()
         cour = CustomUser()
         cour.sno = len(clen)+1
-        cour.username=name
-        #cour.UNname = name
+        cour.username=bioid
+        cour.User_Name = name
         #print(cour.UNname)
         cour.Biometricid = bioid
         cour.Designation = desig

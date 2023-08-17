@@ -31,6 +31,7 @@ urlpatterns = [
     # path('course_marks',views.course_marks,name='course_marks'),
     path('storeinput',views.storeinput,name='storeinput'),
     path('',views.user_login,name='index'),
+    # path('user_login',views.user_login,name='index'),
     path('user_register',views.user_registration,name='user_register'),
     path('user_logout',views.user_logout,name='user_logout'),
     path('faculty_dashboard',views.faculty_dashboard,name='faculty_dashboard'),
