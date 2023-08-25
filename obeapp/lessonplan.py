@@ -320,7 +320,7 @@ def updateplan(request):
              lp_co=lectureplan.objects.filter(course_code=coursecode,course_outcome=course_outcome)
              len_lst.append(len(lp_co))
             # lp_coNm=[[str(i+1),"CO"+str(i+1),"co"+str(i)+"ilo"+str(j),"co"+str(i)+"knilo"+str(j),"co"+str(i)+"nfhr"+str(j),"co"+str(i)+"pedgy"+str(j),"co"+str(i)+"tds"+str(j)] for j in range(len(lp_co))]
-             lp_coNm=[[str(i+1),"CO"+str(i+1),"co"+str(i-1)+"ilo"+str(j),"co"+str(i-1)+"knilo"+str(j),"co"+str(i-1)+"nfhr"+str(j),"co"+str(i-1)+"pedgy"+str(j),"co"+str(i-1)+"tds"+str(j)] for j in range(len(lp_co))]
+             lp_coNm=[[str(j+1),"CO"+str(i+1),"co"+str(i-1)+"ilo"+str(j),"co"+str(i-1)+"knilo"+str(j),"co"+str(i-1)+"nfhr"+str(j),"co"+str(i-1)+"pedgy"+str(j),"co"+str(i-1)+"tds"+str(j)] for j in range(len(lp_co))]
              lp_coF=zip(lp_co,lp_coNm)
              print("***************************")
              #print(lp_co)

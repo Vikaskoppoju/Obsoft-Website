@@ -356,7 +356,7 @@ input{
                 <center><h4 class="lessonplan heads">TextBooks</h4></center>
                 <table border="0" style="table-layout: fixed;width: 100%;border: 1px solid black;" class="tb_rb" id="textbook_table">
                     {% for i,j in textbookF%}
-                    <tr  id="rmtb{{i.sno}}">
+                    <tr  id="rm"{{j}}>
                         <td class="align_left"style="width:50% ;"><input  name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
                         <td class="align_left"style="width:50% ;"><input  name="{{j}}" value="{{i.textbook_details}}" placeholder="{{i.textbook_details}}"></td>
                     </tr>
@@ -374,7 +374,7 @@ input{
                 <input type="text" class="non" name="copyreferencebook" value="{{rfbook_len}}" class="copy" placeholder="{{rfbook_len}}" id="copyrb">
                 <table border="0" style="table-layout: fixed;width: 100%;border: 1px solid black;" class="tb_rb" id="referencebook_table">
                     {% for i,j in rfbookF %}
-                    <tr id="rmrb{{i.sno}}">
+                    <tr id="rm{{j}}">
                         <td style="width: 50%;" ><input  name="" value="{{i.sno}}" placeholder="{{i.sno}}"></td>
                         <td class="align_left" style="width: 50%;" ><input   name="{{j}}" value="{{i.rfbook_details}}" placeholder="{{i.rfbook_details}}"></td>
                     </tr>
@@ -382,7 +382,7 @@ input{
                 </table>
                 <div class="xyz">
                     <div class="adding_button btn btn-primary" onclick="referencebook()"><center>+ ADD</center></div>&nbsp;&nbsp;&nbsp;
-                <div onclick="rmrb()" class="remove_button btn btn-primary"><center>- REMOVE</center></div>
+                <div onclick="rmrb()" class="btn btn-primary"><center>- REMOVE</center></div>
                 </div>
             </div>
             <div id="targetproficiency">
@@ -426,7 +426,7 @@ input{
                     </thead>
                     {% for j,k in i %}
                     <tr id="co{{a}}trm{{j.sno}}">
-                        <td ><input  name="{{k.0}}" value="{{j.sno}}" placeholder="{{j.sno}}"></td>
+                        <td ><input  name="{{k.0}}" value="{{k.0}}" placeholder="{{k.0}}"></td>
                         <td><input  name="{{k.1}}" value="{{j.course_outcome}}" placeholder="{{j.course_outcome}}"></td>
                         <td ><input  name="{{k.2}}" value="{{j.ilo}}" placeholder="{{j.ilo}}"></td>
                         <td><input  name="{{k.3}}"  value="{{j.knowledgelevel}}" placeholder="{{j.knowledgelevel}}"></td>
@@ -741,13 +741,15 @@ function rmtb(){
  }
 }
 var count_referencebook=parseInt("{{rfbook_len|safe}}")
-var rb=['rmrb1','rmrb2','rmrb3','rmrb4','rmrb5','rmrb6','rmrb7','rmrb8','rmrb9','rmrb10','rmrb11','rmrb12','rmrb13','rmrb14','rmrb15','rmrb16','rmrb17','rmrb18','rmrb19','rmrb20','rmrb21','rmrb22','rmrb23','rmrb24','rmrb25','rmrb26','rmrb27','rmrb28','rmrb29','rmrb30'];
-var list_referencebook=['rb1','rb2','rb3','rb4','rb5','rb6','rb7','rb8','rb9','rb10','rb11','rb12','rb13','rb14','rb15','rb16','rb17','rb18','rb19','rb20','rb21','rb22','rb23','rb24','rb25','rb26','rb27','rb28','rb29','rb30'];
+var rb=['rmrb0','rmrb1','rmrb2','rmrb3','rmrb4','rmrb5','rmrb6','rmrb7','rmrb8','rmrb9','rmrb10','rmrb11','rmrb12','rmrb13','rmrb14','rmrb15','rmrb16','rmrb17','rmrb18','rmrb19','rmrb20','rmrb21','rmrb22','rmrb23','rmrb24','rmrb25','rmrb26','rmrb27','rmrb28','rmrb29','rmrb30'];
+var list_referencebook=['rb0','rb1','rb2','rb3','rb4','rb5','rb6','rb7','rb8','rb9','rb10','rb11','rb12','rb13','rb14','rb15','rb16','rb17','rb18','rb19','rb20','rb21','rb22','rb23','rb24','rb25','rb26','rb27','rb28','rb29','rb30'];
 function rmrb(){
  if(count_referencebook==1){
      alert('its mandatory');
  }
  else{
+    console.log("copyreferencebook");
+    console.log('***********************');
      var rm=document.getElementById(rb[count_referencebook-1]);
      rm.remove();
      
@@ -758,34 +760,64 @@ function rmrb(){
  }
 }
 function referencebook(){
- if(count_referencebook==30){
-     alert('only ten 10 referencebooks');
+ if(count_textbook==30){
+     alert('only ten 30 referencebook');
  }
  else{
-    
-     var copyrb=document.getElementById('copyrb');
-     
+    console.log("helo ooooooooooooooooo");
      var tab=document.getElementById("referencebook_table");
      var row=document.createElement('tr');
      var td1=document.createElement('td');
      var td2=document.createElement('td');
      var inp=document.createElement('input');
-     row.setAttribute('id',"rmrb"+count_referencebook);
      td1.setAttribute('value',count_referencebook);
      td1.innerHTML=count_referencebook+1;
+     row.setAttribute('id',"rmrb"+count_referencebook);
      inp.setAttribute('type','text');
      inp.setAttribute('name',"rb"+count_referencebook);
-     inp.setAttribute('class','referencebook_inputdiv');
+    //  inp.setAttribute('class','referencebook_inputdiv');
      //inp.setAttribute('required','');
+     inp.setAttribute('class','textbooks_inputdiv');
      tab.append(row);
      row.append(td1);
      row.append(td2);
      td2.append(inp);
      count_referencebook+=1;
-     copyrb.setAttribute('value',count_referencebook);
-     copyrb.setAttribute('placeholder',count_referencebook);
+     var copytb=document.getElementById('copyrb');
+     copytb.setAttribute('value',count_referencebook);
+     copytb.setAttribute('placeholder',count_referencebook);
+
  }
 }
+// function referencebook(){
+//  if(count_referencebook==30){
+//      alert('only ten 10 referencebooks');
+//  }
+//  else{
+    
+//      var copyrb=document.getElementById('copyrb');
+     
+//      var tab=document.getElementById("referencebook_table");
+//      var row=document.createElement('tr');
+//      var td1=document.createElement('td');
+//      var td2=document.createElement('td');
+//      var inp=document.createElement('input');
+//      row.setAttribute('id',"rmrb"+count_referencebook);
+//      td1.setAttribute('value',count_referencebook);
+//      td1.innerHTML=count_referencebook+1;
+//      inp.setAttribute('type','text');
+//      inp.setAttribute('name',"rb"+count_referencebook);
+//      inp.setAttribute('class','referencebook_inputdiv');
+//      //inp.setAttribute('required','');
+//      tab.append(row);
+//      row.append(td1);
+//      row.append(td2);
+//      td2.append(inp);
+//      count_referencebook+=1;
+//      copyrb.setAttribute('value',count_referencebook);
+//      copyrb.setAttribute('placeholder',count_referencebook);
+//  }
+// }
      </script>
     {% endblock %}
         </body>
