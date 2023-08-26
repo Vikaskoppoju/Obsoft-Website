@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import lessonplanBatch,courseoutcomes,textbooks,referencebooks,targetproficiency,lectureplan,co_pso_Matrix,course_end_survey,details_of_instructors,teachers
+from .models import lessonplanBatch,courseoutcomes,textbooks,referencebooks,targetproficiency,lectureplan,co_pso_Matrix,course_end_survey,details_of_instructors,teachers,mid1,mid2,sem
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 
@@ -73,6 +73,52 @@ def storeinput(request):
                  
                   co_lp=courseoutcomes.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=knowledge_level,course_code=coursecode)
                   co_lp.save();
+             hf=int(numco/2)
+             for i in range(1,hf+2):
+                  co=str(i)
+                  course_outcome="-"
+                  knowledge_level="-"
+                  course_outcome=request.POST['mid1co'+co]
+                  kl=request.POST['mid1kl'+co]
+                  k1=request.POST['mid1k1'+co]
+                  k2=request.POST['mid1k2'+co]
+                  k3=request.POST['mid1k3'+co]
+                  k4=request.POST['mid1k4'+co]
+                  tm=request.POST['mid1tm'+co]
+
+                 
+                  co_sem=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem.save();
+             for i in range(hf+1,numco+1):
+                  co=str(i)
+                  course_outcome="-"
+                  knowledge_level="-"
+                  course_outcome=request.POST['mid2co'+co]
+                  kl=request.POST['mid2kl'+co]
+                  k1=request.POST['mid2k1'+co]
+                  k2=request.POST['mid2k2'+co]
+                  k3=request.POST['mid2k3'+co]
+                  k4=request.POST['mid2k4'+co]
+                  tm=request.POST['mid2tm'+co]
+
+                 
+                  co_sem=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem.save();
+             for i in range(1,numco+1):
+                  co=str(i)
+                  course_outcome="-"
+               #    knowledge_level=POST
+                  course_outcome=request.POST['semco'+co]
+                  kl=request.POST['semkl'+co]
+                  k1=request.POST['semk1'+co]
+                  k2=request.POST['semk2'+co]
+                  k3=request.POST['semk3'+co]
+                  k4=request.POST['semk4'+co]
+                  tm=request.POST['semtm'+co]
+
+                 
+                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem.save();
              #textbooks table 3
              count_tb1=request.POST['copytexbook']
              count_tb2=int(count_tb1)
@@ -262,8 +308,12 @@ def viewplan(request):
         tp=targetproficiency.objects.filter(course_code=coursecode)
         copsomat=co_pso_Matrix.objects.filter(course_code=coursecode)
         question=course_end_survey.objects.filter(course_code=coursecode)
+        mid11=mid1.objects.filter(course_code=coursecode)
+        mid22=mid2.objects.filter(course_code=coursecode)
+        sem11=sem.objects.filter(course_code=coursecode)
+        print(sem11,"*****")
         instructor=details_of_instructors.objects.filter(course_code=coursecode)
-        d={'branch':branch,'bat':bat,'result_co':result_co,'textbook':textbook,'rfbook':rfbook,'tp':tp,'lst':lst,'copsomat':copsomat,'question':question,'instructor':instructor,'l':l}
+        d={'branch':branch,'bat':bat,'result_co':result_co,'textbook':textbook,'rfbook':rfbook,'tp':tp,'lst':lst,'copsomat':copsomat,'question':question,'instructor':instructor,'l':l,'mid1':mid11,'mid2':mid22,'sem':sem11}
         return render(request,'obeapp/obapp/viewplan.html',d)
 
 @login_required(login_url='/user_login')
@@ -356,9 +406,18 @@ def updateplan(request):
         question=course_end_survey.objects.filter(course_code=coursecode)
         questionNm=[[str(i+1),"co"+str(i),'qs'+str(i)] for i in range(len(question))]
         questionF=zip(question,questionNm)
+        mid1obj=mid1.objects.filter(course_code=coursecode)
+        mid2obj=mid2.objects.filter(course_code=coursecode)
+        semobj=sem.objects.filter(course_code=coursecode)
+        mid1Nm=[[str(i+1),"mid1co"+str(i+1),"mid1kl"+str(i+1),'mid1k1'+str(i+1),'mid1k2'+str(i+1),'mid1k3'+str(i+1),'mid1k4'+str(i+1),'mid1tm'+str(i+1)] for i in range(len(mid1obj))]
+        mid2Nm=[[str(i+1),"mid2co"+str(i+1),"mid2kl"+str(i+1),'mid2k1'+str(i+1),'mid2k2'+str(i+1),'mid2k3'+str(i+1),'mid2k4'+str(i+1),'mid2tm'+str(i+1)] for i in range(len(mid2obj))]
+        semNm=[[str(i+1),"semco"+str(i+1),"semkl"+str(i+1),'semk1'+str(i+1),'semk2'+str(i+1),'semk3'+str(i+1),'semk4'+str(i+1),'semtm'+str(i+1)] for i in range(len(semobj))]
+        mid11=zip(mid1Nm,mid1obj)
+        mid22=zip(mid2Nm,mid2obj)
+        sem11=zip(semNm,semobj)
         instructor=details_of_instructors.objects.filter(course_code=coursecode)
         numco1=len(result_co)
-        d={'branch':branch,'numco':numco1,'result_coF':result_coF,'bat':bat,'result_co':result_co,'textbookF':textbookF,'textbook_len':textbook_len,'rfbookF':rfbookF,"rfbook_len":rfbook_len,'tpF':tpF,'lstF':lstF,"lst_len":lst_len,"len_lst":len_lst,'copsomatF':copsomatF,'questionF':questionF,'instructor':instructor,'l':l}
+        d={'branch':branch,'numco':numco1,'result_coF':result_coF,'bat':bat,'result_co':result_co,'textbookF':textbookF,'textbook_len':textbook_len,'rfbookF':rfbookF,"rfbook_len":rfbook_len,'tpF':tpF,'lstF':lstF,"lst_len":lst_len,"len_lst":len_lst,'copsomatF':copsomatF,'questionF':questionF,'instructor':instructor,'l':l,'mid1':mid11,'mid2':mid22,'sem':sem11}
         return render(request,'obeapp/obapp/updateform.html',d)
 def updateinput(request):
     if request.method == "POST":
@@ -387,6 +446,12 @@ def updateinput(request):
              dcopsomat.delete()
              dquestion=course_end_survey.objects.filter(course_code=coursecode)
              dquestion.delete()
+             mid11=mid1.objects.filter(course_code=coursecode)
+             mid11.delete()
+             mid22=mid2.objects.filter(course_code=coursecode)
+             mid22.delete()
+             sem11=sem.objects.filter(course_code=coursecode)
+             sem11.delete()
              dinstructor=details_of_instructors.objects.filter(course_code=coursecode)
              dinstructor.delete()
              fl=0
@@ -464,6 +529,54 @@ def updateinput(request):
                #    l1=request.POST['co'+str(i+1)+'l1']
                   tptb=targetproficiency.objects.create(co=co,tpl=tpl,l3=l3,l2=l2,l1=l1,course_code=coursecode)
                   tptb.save();
+             hf=int(numco/2)
+             for i in range(1,hf+2):
+                  co=str(i)
+                  course_outcome="-"
+                  knowledge_level="-"
+                  course_outcome=request.POST['mid1co'+co]
+                  kl=request.POST['mid1kl'+co]
+                  k1=request.POST['mid1k1'+co]
+                  k2=request.POST['mid1k2'+co]
+                  k3=request.POST['mid1k3'+co]
+                  k4=request.POST['mid1k4'+co]
+                  tm=request.POST['mid1tm'+co]
+
+                 
+                  co_mid1=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_mid1.save();
+             for i in range(hf+1,numco+1):
+                  co=str(i)
+                  course_outcome="-"
+                  knowledge_level="-"
+                  course_outcome=request.POST['mid2co'+co]
+                  kl=request.POST['mid2kl'+co]
+                  k1=request.POST['mid2k1'+co]
+                  k2=request.POST['mid2k2'+co]
+                  k3=request.POST['mid2k3'+co]
+                  k4=request.POST['mid2k4'+co]
+                  tm=request.POST['mid2tm'+co]
+
+                 
+                  co_mid2=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_mid2.save();
+             for i in range(1,numco+1):
+                  co=str(i)
+                  course_outcome="-"
+               #    knowledge_level=POST
+                  course_outcome=request.POST['semco'+co]
+                  kl=request.POST['semkl'+co]
+                  k1=request.POST['semk1'+co]
+                  k2=request.POST['semk2'+co]
+                  k3=request.POST['semk3'+co]
+                  k4=request.POST['semk4'+co]
+                  tm=request.POST['semtm'+co]
+
+                 
+                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem.save();
+                  print("***********",co_sem)
+             
     #tpl=models.CharField(max_length=50,default="Target Proficiency Level")
     #course_code=models.CharField(max_length=15)            
 

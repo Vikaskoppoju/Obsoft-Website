@@ -507,6 +507,87 @@ input{
                 </table>
             </div>
             <br>
+            <div id="mid1">
+                <br>
+                <br>
+                <center><h4>Mid-Term Exminations-I</h4></center>
+                <table  id="mid1" border="1" width="70%" cellpadding="7px">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                    {% for j,i in mid1 %}
+                    <td ><h5>CO{{j.0}}</h5></td>
+                        <td ><input type="text" name="{{j.1}}" value="{{i.courseoutcome}}" placeholder="{{i.courseoutcome}}"></h5></td>
+                        <td ><input type="text" name="{{j.2}}" value="{{i.knowledge_level}}" placeholder="{{i.knowledge_level}}"></td>
+                        <td ><input type="text" name="{{j.3}}" value="{{i.k1}}" placeholder="{{i.k1}}"></td>
+                        <td ><input type="text" name="{{j.4}}" value="{{i.k2}}" placeholder="{{i.k2}}"></td>
+                        <td ><input type="text" name="{{j.5}}" value="{{i.k3}}" placeholder=""></td>
+                        <td ><input type="text" name="{{j.6}}" value="{{i.k4}}" placeholder="{{i.k3}}"></td>
+                        <td ><input type="text" name="{{j.7}}" value="{{i.totalmarks}}" placeholder="{{i.totalmarks}}"></td>
+                    {% endfor%}
+                </table>
+            </div>
+            <div id="mid1">
+                <br>
+                <br>
+                <center><h4>Mid-Term Exminations-II</h4></center>
+                <table  id="mid1" border="1" width="70%" cellpadding="7px">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                    {% for j,i in mid2 %}
+                    <td ><h5>CO{{j.0}}</h5></td>
+                        <td ><input type="text" name="{{j.1}}" value="{{i.courseoutcome}}" placeholder="{{i.courseoutcome}}"></h5></td>
+                        <td ><input type="text" name="{{j.2}}" value="{{i.knowledge_level}}" placeholder="{{i.knowledge_level}}"></td>
+                        <td ><input type="text" name="{{j.3}}" value="{{i.k1}}" placeholder="{{i.k1}}"></td>
+                        <td ><input type="text" name="{{j.4}}" value="{{i.k2}}" placeholder="{{i.k2}}"></td>
+                        <td ><input type="text" name="{{j.5}}" value="{{i.k3}}" placeholder=""></td>
+                        <td ><input type="text" name="{{j.6}}" value="{{i.k4}}" placeholder="{{i.k3}}"></td>
+                        <td ><input type="text" name="{{j.7}}" value="{{i.totalmarks}}" placeholder="{{i.totalmarks}}"></td>
+                    {% endfor%}
+                </table>
+            </div>
+            <div id="mid1">
+                <br>
+                <br>
+                <center><h4>SEMESTER</h4></center>
+                <table  id="mid1" border="1" width="70%" cellpadding="7px">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                    {% for j,i in sem %}
+                    <td ><h5>CO{{j.0}}</h5></td>
+                        <td ><input type="text" name="{{j.1}}" value="{{i.courseoutcome}}" placeholder="{{i.courseoutcome}}"></h5></td>
+                        <td ><input type="text" name="{{j.2}}" value="{{i.knowledge_level}}" placeholder="{{i.knowledge_level}}"></td>
+                        <td ><input type="text" name="{{j.3}}" value="{{i.k1}}" placeholder="{{i.k1}}"></td>
+                        <td ><input type="text" name="{{j.4}}" value="{{i.k2}}" placeholder="{{i.k2}}"></td>
+                        <td ><input type="text" name="{{j.5}}" value="{{i.k3}}" placeholder=""></td>
+                        <td ><input type="text" name="{{j.6}}" value="{{i.k4}}" placeholder="{{i.k3}}"></td>
+                        <td ><input type="text" name="{{j.7}}" value="{{i.totalmarks}}" placeholder="{{i.totalmarks}}"></td>
+                    {% endfor%}
+                </table>
+            </div>
             <div id="details_of_course_instructor">
                <center> <h4 class="lessonplan heads">Details of Course Instructor</h1></center>
                 <table border="1" class="dof" style="table-layout: fixed;width: 100%;border: 1px solid black;" >
@@ -536,10 +617,7 @@ input{
                 </table>
                 <br>
                 <br>
-                <h4 class="below_heading signs">Name of the Course Coordinator (with Designation):{{i.name}},{{i.designation}}</h4><br>
-                <h4 class="below_heading signs">Signature of the Course Coordinator:</h4><br>
-                <h4 class="below_heading signs">Signature of the Module Coordinator:</h4><br>
-                <h4 class="below_heading signs">Signature of the Head of the Department:</h4><br>
+                
             </div>
            
         </div>

@@ -613,6 +613,7 @@ h1{
                     td3.append(inp2);
 
                 }
+                
                 //<div id="targetproficiency">
                 //*********** target proficiency table****************
                 var tpp=document.getElementById('targetproficiency');
@@ -792,7 +793,182 @@ h1{
                     tempinp.style.display='none';
                 }
             
+                // **********************************mid1 table************************
+                var cotb=document.getElementById('mid1');
+                var codiv=document.getElementById('mid11');
+                codiv.style.display='block';
+                var hf=n/2;
+                for(var i=0;i<hf;i++){
+                    console.log("hello in for loop***");
+                    var tr=document.createElement('tr');
+                    var td1=document.createElement('td');
+                    var td2=document.createElement('td');
+                    var td3=document.createElement('td');
+                    var td4=document.createElement('td');
+                    var td5=document.createElement('td');
+                    var td6=document.createElement('td');
+                    var td7=document.createElement('td');
+                    var td8=document.createElement('td');
+                    var inp1=document.createElement('input');
+                    var inp2=document.createElement('input');
+                    var inp3=document.createElement('input');
+                    var inp4=document.createElement('input');
+                    var inp5=document.createElement('input');
+                    var inp6=document.createElement('input');
+                    var inp7=document.createElement('input');
+                    // inp1.setAttribute('class',"courseoutcomes_secondinputdiv");
+                    // inp2.setAttribute('class',"co_knowledgelevel");
+                    inp2.style.width="140px";
+                    //let num=i.toString();
+                    let co=cos+(i+1);
+                    let kl=kls+(i+1);
+                    td1.innerHTML="CO"+(i+1);
+                    inp1.setAttribute('name','mid1co'+(i+1));
+                    inp2.setAttribute('name','mid1kl'+(i+1));
+                    inp3.setAttribute('name','mid1k1'+(i+1));
+                    inp4.setAttribute('name','mid1k2'+(i+1));
+                    inp5.setAttribute('name','mid1k3'+(i+1));
+                    inp6.setAttribute('name','mid1k4'+(i+1));
+                    inp7.setAttribute('name','mid1tm'+(i+1));
+                    //inp1.setAttribute('name',co);
+                    /*inp1.setAttribute('required','');
+                    inp2.setAttribute('required','');*/
+                    // inp2.setAttribute('name',kl);
+                    cotb.append(tr);
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+                    tr.append(td7);
+                    tr.append(td8);
+                    td2.append(inp1);
+                    td3.append(inp2);
+                    td4.append(inp3);
+                    td5.append(inp4);
+                    td6.append(inp5);
+                    td7.append(inp6);
+                    td8.append(inp7);
 
+                }
+                // **********************************mid2 table************************
+                var cotb=document.getElementById('mid2');
+                var codiv=document.getElementById('mid22');
+                codiv.style.display='block';
+                for(var i=parseInt(hf);i<n;i++){
+                    console.log("hello in for loop***");
+                    var tr=document.createElement('tr');
+                    var td1=document.createElement('td');
+                    var td2=document.createElement('td');
+                    var td3=document.createElement('td');
+                    var td4=document.createElement('td');
+                    var td5=document.createElement('td');
+                    var td6=document.createElement('td');
+                    var td7=document.createElement('td');
+                    var td8=document.createElement('td');
+                    var inp1=document.createElement('input');
+                    var inp2=document.createElement('input');
+                    var inp3=document.createElement('input');
+                    var inp4=document.createElement('input');
+                    var inp5=document.createElement('input');
+                    var inp6=document.createElement('input');
+                    var inp7=document.createElement('input');
+                    // inp1.setAttribute('class',"courseoutcomes_secondinputdiv");
+                    // inp2.setAttribute('class',"co_knowledgelevel");
+                    inp2.style.width="140px";
+                    //let num=i.toString();
+                    let co=cos+(i+1);
+                    let kl=kls+(i+1);
+                    td1.innerHTML="CO"+(i+1);
+                    inp1.setAttribute('name','mid2co'+(i+1));
+                    inp2.setAttribute('name','mid2kl'+(i+1));
+                    inp3.setAttribute('name','mid2k1'+(i+1));
+                    inp4.setAttribute('name','mid2k2'+(i+1));
+                    inp5.setAttribute('name','mid2k3'+(i+1));
+                    inp6.setAttribute('name','mid2k4'+(i+1));
+                    inp7.setAttribute('name','mid2tm'+(i+1));
+                    //inp1.setAttribute('name',co);
+                    /*inp1.setAttribute('required','');
+                    inp2.setAttribute('required','');*/
+                    // inp2.setAttribute('name',kl);
+                    cotb.append(tr);
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+                    tr.append(td7);
+                    tr.append(td8);
+                    td2.append(inp1);
+                    td3.append(inp2);
+                    td4.append(inp3);
+                    td5.append(inp4);
+                    td6.append(inp5);
+                    td7.append(inp6);
+                    td8.append(inp7);
+
+                }
+                // **********************************sem table************************
+                var cotb=document.getElementById('sem1');
+                var codiv=document.getElementById('sem11');
+                codiv.style.display='block';
+                for(var i=0;i<n;i++){
+                    console.log("hello in for loop***");
+                    var tr=document.createElement('tr');
+                    var td1=document.createElement('td');
+                    var td2=document.createElement('td');
+                    var td3=document.createElement('td');
+                    var td4=document.createElement('td');
+                    var td5=document.createElement('td');
+                    var td6=document.createElement('td');
+                    var td7=document.createElement('td');
+                    var td8=document.createElement('td');
+                    var inp1=document.createElement('input');
+                    var inp2=document.createElement('input');
+                    var inp3=document.createElement('input');
+                    var inp4=document.createElement('input');
+                    var inp5=document.createElement('input');
+                    var inp6=document.createElement('input');
+                    var inp7=document.createElement('input');
+                    // inp1.setAttribute('class',"courseoutcomes_secondinputdiv");
+                    // inp2.setAttribute('class',"co_knowledgelevel");
+                    inp2.style.width="140px";
+                    //let num=i.toString();
+                    let co=cos+(i+1);
+                    let kl=kls+(i+1);
+                    td1.innerHTML="CO"+(i+1);
+                    inp1.setAttribute('name','semco'+(i+1));
+                    inp2.setAttribute('name','semkl'+(i+1));
+                    inp3.setAttribute('name','semk1'+(i+1));
+                    inp4.setAttribute('name','semk2'+(i+1));
+                    inp5.setAttribute('name','semk3'+(i+1));
+                    inp6.setAttribute('name','semk4'+(i+1));
+                    inp7.setAttribute('name','semtm'+(i+1));
+                    //inp1.setAttribute('name',co);
+                    /*inp1.setAttribute('required','');
+                    inp2.setAttribute('required','');*/
+                    // inp2.setAttribute('name',kl);
+                    cotb.append(tr);
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+                    tr.append(td7);
+                    tr.append(td8);
+                    td2.append(inp1);
+                    td3.append(inp2);
+                    td4.append(inp3);
+                    td5.append(inp4);
+                    td6.append(inp5);
+                    td7.append(inp6);
+                    td8.append(inp7);
+
+                }
+            
             //******************************
             //co-po &copso matrix
             //******************************
@@ -1097,6 +1273,7 @@ h1{
                 instd7.append(insinp6);
                 
             }
+
         
             var count_textbook=1;
             var tb=['rmtb1','rmtb2','rmtb3','rmtb4','rmtb5','rmtb6','rmtb7','rmtb8','rmtb9','rmtb10','rmtb11','rmtb12','rmtb13','rmtb14','rmtb15','rmtb16','rmtb17','rmtb18','rmtb19','rmtb20','rmtb21','rmtb22','rmtb23','rmtb24','rmtb25','rmtb26','rmtb27','rmtb28','rmtb29','rmtb30'];
@@ -1390,6 +1567,57 @@ function referencebook(){
                 <br>
                 <br>
                 <center><h4>Details of Course Instructor</h4></center>
+            </div>
+            <div id="mid11">
+                <br>
+                <br>
+                <center><h4>Mid-Term Exminations-I</h4></center>
+                <table  id="mid1" style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                </table>
+            </div>
+            <div id="mid22">
+                <br>
+                <br>
+                <center><h4>Mid-Term Exminations-II</h4></center>
+                <table  id="mid2" style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                </table>
+            </div>
+            <div id="sem11">
+                <br>
+                <br>
+                <center><h4>SEMESTER</h4></center>
+                <table  id="sem1" style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <td ><h5>CO<span>*</span></h5></td>
+                        <td ><h5>Course Outcomes<span>*</span></h5></td>
+                        <td ><h5>Co knowledge Level<span>*</span></h5></td>
+                        <td ><h5>K1<span>*</span></h5></td>
+                        <td ><h5>K2<span>*</span></h5></td>
+                        <td ><h5>K3<span>*</span></h5></td>
+                        <td ><h5>K4<span>*</span></h5></td>
+                        <td ><h5>Total marks<span>*</span></h5></td>
+                    </thead>
+                </table>
             </div>
             
         </div>
