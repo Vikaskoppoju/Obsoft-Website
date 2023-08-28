@@ -71,7 +71,7 @@ def storeinput(request):
                   #knowledge_level=request.POST["kl"+str(i)]
                   
                  
-                  co_lp=courseoutcomes.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=knowledge_level,course_code=coursecode)
+                  co_lp=courseoutcomes.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=knowledge_level,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_lp.save();
              hf=int(numco/2)
              for i in range(1,hf+2):
@@ -87,7 +87,7 @@ def storeinput(request):
                   tm=request.POST['mid1tm'+co]
 
                  
-                  co_sem=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_sem.save();
              for i in range(hf+1,numco+1):
                   co=str(i)
@@ -102,7 +102,7 @@ def storeinput(request):
                   tm=request.POST['mid2tm'+co]
 
                  
-                  co_sem=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_sem.save();
              for i in range(1,numco+1):
                   co=str(i)
@@ -117,7 +117,7 @@ def storeinput(request):
                   tm=request.POST['semtm'+co]
 
                  
-                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_sem.save();
              #textbooks table 3
              count_tb1=request.POST['copytexbook']
@@ -130,7 +130,7 @@ def storeinput(request):
                   if(request.POST[ele]):
                       textbook=request.POST[ele] 
                   
-                  tb_lp=textbooks.objects.create(sno=i+1,textbook_details=textbook,course_code=coursecode)              
+                  tb_lp=textbooks.objects.create(sno=i+1,textbook_details=textbook,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)              
                   tb_lp.save();
              #referencebooks table 4
              count_rb1=request.POST['copyreferencebook']
@@ -141,7 +141,7 @@ def storeinput(request):
                   referencebook="-"
                   if(request.POST[ele]):
                     referencebook=request.POST[ele]
-                  rb_lp=referencebooks.objects.create(sno=i+1,rfbook_details=referencebook,course_code=coursecode)              
+                  rb_lp=referencebooks.objects.create(sno=i+1,rfbook_details=referencebook,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)              
                   rb_lp.save();
         
             #*********** target proficiency table****************
@@ -159,7 +159,7 @@ def storeinput(request):
                     l2=request.POST['co'+str(i+1)+'l2']
                   if(request.POST['co'+str(i+1)+'l1']):
                     l1=request.POST['co'+str(i+1)+'l1']
-                  tptb=targetproficiency.objects.create(co=co,tpl=tpl,l3=l3,l2=l2,l1=l1,course_code=coursecode)
+                  tptb=targetproficiency.objects.create(co=co,tpl=tpl,l3=l3,l2=l2,l1=l1,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   tptb.save();
     #tpl=models.CharField(max_length=50,default="Target Proficiency Level")
     #course_code=models.CharField(max_length=15)            
@@ -186,7 +186,7 @@ def storeinput(request):
                        if(request.POST["co"+str(i)+"tds"+str(j)]):
                          teachingaids=request.POST["co"+str(i)+"tds"+str(j)]
                        #course_code="v20123"
-                       co1_lp=lectureplan.objects.create(sno=sno,course_outcome=course_outcome,ilo=ilo,knowledgelevel=knowledgelevel,noof_hours=noof_hours,pedagogy=pedagogy,teachingaids=teachingaids,course_code=coursecode)
+                       co1_lp=lectureplan.objects.create(sno=sno,course_outcome=course_outcome,ilo=ilo,knowledgelevel=knowledgelevel,noof_hours=noof_hours,pedagogy=pedagogy,teachingaids=teachingaids,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                        co1_lp.save();
              #******* co&pso matrix***************
              for k in range(numco+1):
@@ -238,7 +238,7 @@ def storeinput(request):
                 if(request.POST[temp+"pso2"]):
                     pso2=request.POST[temp+"pso2"]
                 
-                co_pso=co_pso_Matrix.objects.create(cos=co,po1=po1,po2=po2,po3=po3,po4=po4,po5=po5,po6=po6,po7=po7,po8=po8,po9=po9,po10=po10,po11=po11,po12=po12,pso1=pso1,pso2=pso2,course_code=coursecode)
+                co_pso=co_pso_Matrix.objects.create(cos=co,po1=po1,po2=po2,po3=po3,po4=po4,po5=po5,po6=po6,po7=po7,po8=po8,po9=po9,po10=po10,po11=po11,po12=po12,pso1=pso1,pso2=pso2,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                 co_pso.save();
              #*************course end survey questionery**************
              for i in range(numco):
@@ -246,7 +246,7 @@ def storeinput(request):
                    if(request.POST["qs"+str(i+1)]):
                          qs=request.POST["qs"+str(i+1)]
                    qs_co="CO"+str(i+1)
-                   lp_qs=course_end_survey.objects.create(sno=str(i+1),cos=qs_co,question=qs,course_code=coursecode)
+                   lp_qs=course_end_survey.objects.create(sno=str(i+1),cos=qs_co,question=qs,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                    lp_qs.save();
              name,designation,year,section,contactno,email = "-","-","-","-","-","-"
              name=request.POST['insname']
@@ -255,7 +255,7 @@ def storeinput(request):
              section=request.POST['inssec']
              contactno=request.POST['inscno']
              email=request.POST['insemail']
-             lp_ins=details_of_instructors.objects.create(sno='1',name=name,designation=designation,year=year,section=section,contactno=contactno,email=email,course_code=coursecode)
+             lp_ins=details_of_instructors.objects.create(sno='1',name=name,designation=designation,year=year,section=section,contactno=contactno,email=email,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester)
              lp_ins.save();
         #return redirect('mainpage') 
         return render(request,'obeapp/obapp/mainpage.html')
@@ -479,7 +479,7 @@ def updateinput(request):
                        knowledge_level=request.POST["kl"+str(i)]
                   #courseoutcome=request.POST["coo"+str(i)]
                   #knowledge_level=request.POST["kl"+str(i)]
-                  co_lp=courseoutcomes.objects.create(co=co,courseoutcome=courseoutcome,knowledge_level=knowledge_level,course_code=coursecode)
+                  co_lp=courseoutcomes.objects.create(co=co,courseoutcome=courseoutcome,knowledge_level=knowledge_level,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_lp.save();
              #textbooks table 3
              count_tb1=request.POST['copytexbook']
@@ -493,7 +493,7 @@ def updateinput(request):
                   
                   if(request.POST["tb"+str(i)]):
                       textbook=request.POST["tb"+str(i)]
-                  tb_lp=textbooks.objects.create(sno=i+1,textbook_details=textbook,course_code=coursecode)              
+                  tb_lp=textbooks.objects.create(sno=i+1,textbook_details=textbook,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)              
                   tb_lp.save();
              #referencebooks table 4
              count_rb1=request.POST['copyreferencebook']
@@ -505,7 +505,7 @@ def updateinput(request):
                   if(request.POST["rb"+str(i)]):
                     referencebook=request.POST["rb"+str(i)]
                   #referencebook=request.POST["rb"+str(i)]
-                  rb_lp=referencebooks.objects.create(sno=i+1,rfbook_details=referencebook,course_code=coursecode)              
+                  rb_lp=referencebooks.objects.create(sno=i+1,rfbook_details=referencebook,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)              
                   rb_lp.save();
         
             #*********** target proficiency table****************
@@ -527,7 +527,7 @@ def updateinput(request):
                #    l3=request.POST['co'+str(i+1)+'l3']
                #    l2=request.POST['co'+str(i+1)+'l2']
                #    l1=request.POST['co'+str(i+1)+'l1']
-                  tptb=targetproficiency.objects.create(co=co,tpl=tpl,l3=l3,l2=l2,l1=l1,course_code=coursecode)
+                  tptb=targetproficiency.objects.create(co=co,tpl=tpl,l3=l3,l2=l2,l1=l1,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   tptb.save();
              hf=int(numco/2)
              for i in range(1,hf+2):
@@ -543,7 +543,7 @@ def updateinput(request):
                   tm=request.POST['mid1tm'+co]
 
                  
-                  co_mid1=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_mid1=mid1.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_mid1.save();
              for i in range(hf+1,numco+1):
                   co=str(i)
@@ -558,7 +558,7 @@ def updateinput(request):
                   tm=request.POST['mid2tm'+co]
 
                  
-                  co_mid2=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_mid2=mid2.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_mid2.save();
              for i in range(1,numco+1):
                   co=str(i)
@@ -573,7 +573,7 @@ def updateinput(request):
                   tm=request.POST['semtm'+co]
 
                  
-                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode)
+                  co_sem=sem.objects.create(co=co,courseoutcome=course_outcome,knowledge_level=kl,k1=k1,k2=k2,k3=k3,k4=k4,totalmarks=tm,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                   co_sem.save();
                   print("***********",co_sem)
              
@@ -611,7 +611,7 @@ def updateinput(request):
                     #    pedagogy=request.POST["co"+str(i)+"pedgy"+str(j)]
                     #    teachingaids=request.POST["co"+str(i)+"tds"+str(j)]
                        #course_code="v20123"
-                       co1_lp=lectureplan.objects.create(sno=sno,course_outcome=course_outcome,ilo=ilo,knowledgelevel=knowledgelevel,noof_hours=noof_hours,pedagogy=pedagogy,teachingaids=teachingaids,course_code=coursecode)
+                       co1_lp=lectureplan.objects.create(sno=sno,course_outcome=course_outcome,ilo=ilo,knowledgelevel=knowledgelevel,noof_hours=noof_hours,pedagogy=pedagogy,teachingaids=teachingaids,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                        co1_lp.save();
              #******* co&pso matrix***************
              for k in range(numco+1):
@@ -677,7 +677,7 @@ def updateinput(request):
                 if(request.POST[temp+"pso2"]):
                     pso2=request.POST[temp+"pso2"]
                 
-                co_pso=co_pso_Matrix.objects.create(cos=co,po1=po1,po2=po2,po3=po3,po4=po4,po5=po5,po6=po6,po7=po7,po8=po8,po9=po9,po10=po10,po11=po11,po12=po12,pso1=pso1,pso2=pso2,course_code=coursecode)
+                co_pso=co_pso_Matrix.objects.create(cos=co,po1=po1,po2=po2,po3=po3,po4=po4,po5=po5,po6=po6,po7=po7,po8=po8,po9=po9,po10=po10,po11=po11,po12=po12,pso1=pso1,pso2=pso2,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                 co_pso.save();
              #*************course end survey questionery**************
              for i in range(numco):
@@ -686,7 +686,7 @@ def updateinput(request):
                          qs=request.POST["qs"+str(i)]
                    #qs=request.POST["qs"+str(i)]
                    qs_co="CO"+str(i+1)
-                   lp_qs=course_end_survey.objects.create(sno=str(i+1),cos=qs_co,question=qs,course_code=coursecode)
+                   lp_qs=course_end_survey.objects.create(sno=str(i+1),cos=qs_co,question=qs,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester,section=section)
                    lp_qs.save();
              name,designation,year,section,contactno,email = "-","-","-","-","-","-"
              name=request.POST['insname']
@@ -695,7 +695,7 @@ def updateinput(request):
              section=request.POST['inssec']
              contactno=request.POST['inscno']
              email=request.POST['insemail']
-             lp_ins=details_of_instructors.objects.create(sno='1',name=name,designation=designation,year=year,section=section,contactno=contactno,email=email,course_code=coursecode)
+             lp_ins=details_of_instructors.objects.create(sno='1',name=name,designation=designation,year=year,section=section,contactno=contactno,email=email,course_code=coursecode,batch=batch,academicyear=academicyear,programme=programme,semester=semester)
              lp_ins.save();
         #return redirect('obeapp/obapp/updatecoursecode')           
         return render(request,'obeapp/obapp/mainpage.html')

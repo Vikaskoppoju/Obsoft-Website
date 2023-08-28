@@ -336,7 +336,7 @@ def delete_course(request, course_id):
 
 def ManageFaculty(request):
     cur_user=request.session.get('user_id', None)
-    
+    print(cur_user,'*******************')
     obj=CustomUser.objects.get(username=cur_user)
     lst=obj.branch
     lst1=lst.split(",")
@@ -423,7 +423,7 @@ def Department(request):
     dept1=CustomUser.objects.filter(hod=True)
     print(dept1)
     obj2=dept1[0]
-    print(obj2.UName)
+    # print(obj2.UName)
     num=[i for i in range(1,len(dept1)+1)]
     dept=zip(dept1,num)
     return render(request, 'obeapp/admin/dept_hod.html',{'dept':dept})
