@@ -421,7 +421,7 @@ def Department(request):
     # dept=zip(dept1,num)
     # return render(request, 'obeapp/admin/dept_hod.html',{'dept':dept})
     dept1=CustomUser.objects.filter(hod=True)
-    print(dept1)
+    #print(dept1)
     obj2=dept1[0]
     # print(obj2.UName)
     num=[i for i in range(1,len(dept1)+1)]
