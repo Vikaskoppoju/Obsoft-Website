@@ -1038,6 +1038,25 @@ def calculate_sem_results(reg,branch,sem,acyear,coursecode):
 def course_marks(request):
     return render(request, 'obeapp/obapp/storeinput2.html')
 
+from django.contrib import messages  # Import Django's messaging framework hpl
+
+def is_course_entered(exam,regulation,coursecode,branch,sem,acyear):
+    if(exam=='mid1'):
+        book_schema = ModelSchema.objects.get(name=str(regulation) + 'mid1_marks')
+        book = book_schema.as_model()
+    elif(exam=='mid2'):
+        book_schema = ModelSchema.objects.get(name=str(regulation) + 'mid2_marks')
+        book = book_schema.as_model()
+    elif(exam=='sem'):
+        book_schema = ModelSchema.objects.get(name=str(regulation) + 'sem')
+        book = book_schema.as_model()
+    #Book = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
+    existing_class = book.objects.filter(course_code=coursecode,branch=branch,sem=sem,academic_year=acyear)
+    if existing_class.exists():
+
+        return True, "Class with the same name and branch already exists."
+    else:
+        return False,"Class not found"
 
 def storeinput(request):
     if request.method == 'POST':
@@ -1048,6 +1067,12 @@ def storeinput(request):
         branch = request.POST["branch"]
         sem = request.POST["sem"]
         exam = request.POST["exam_type"]
+        exists, warning_message = is_course_entered(exam,regulation,coursecode,branch,sem,acyear)
+        print(warning_message)
+        if exists:
+            messages.warning(request, warning_message)
+            print("exsists")
+            return redirect(uploadcourseattainments)
         if exam=="mid1":
             # print("hereeeee")
             mid1_marks_insert(filename=nm,reg=regulation,sem=sem,branch=branch,acyear=acyear,coursecode=coursecode)
