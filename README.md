@@ -57,6 +57,9 @@ Now visit 👉 http://127.0.0.1:8000/ in your browser.
 - Students can log in to view their progress and reports.
 
 
+<img width="1808" height="832" alt="Screenshot 2025-08-17 103121" src="https://github.com/user-attachments/assets/10053c68-dc2c-4d85-9857-a7f1dfbf588a" />
+<img width="1912" height="905" alt="Screenshot 2025-08-17 174402" src="https://github.com/user-attachments/assets/2c91ebd5-090a-4610-be43-59d87137d7b5" />
+<img width="1892" height="834" alt="Screenshot 2025-08-17 103207" src="https://github.com/user-attachments/assets/a99eecbb-a7d6-4b1f-8ca4-8a39fb0b88cb" />
 
 
 
