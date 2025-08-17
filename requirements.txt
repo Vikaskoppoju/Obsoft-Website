@@ -9,7 +9,7 @@ django-environ==0.10.0
 django-dynamic-model==0.3.0
 gunicorn==20.1.0
 idna==3.4
-install==1.3.5
+
 postgres==4.0
 psycopg2==2.9.6
 psycopg2-binary==2.9.6
@@ -22,4 +22,5 @@ tzdata==2023.3
 urllib3==2.0.2
 mysqlclient==2.1.1
 pandas==2.0.0
-numpy==1.23.5
+numpy>=1.26.0
+
